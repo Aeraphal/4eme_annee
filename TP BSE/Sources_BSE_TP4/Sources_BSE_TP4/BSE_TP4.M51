@@ -1,0 +1,516 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    12/20/2022  11:47:10  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE STARTUP.obj, TP6_BSE_Lib_Config_Globale.obj, TP6_BSE_Lib_Divers.obj, TP6_BSE_Main.obj TO BSE
+>> _TP4 RAMSIZE (256) CODE (0X0000-0XFFFF) XDATA (0X0000-0X0FFF)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  TP6_BSE_Lib_Config_Globale.obj (TP6_BSE_LIB_CONFIG_GLOBALE)
+  TP6_BSE_Lib_Divers.obj (TP6_BSE_LIB_DIVERS)
+  TP6_BSE_Main.obj (TP6_BSE_MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?LMUL)
+
+
+LINK MAP OF MODULE:  BSE_TP4 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000EH     UNIT         ?DT?TP6_BSE_MAIN
+            DATA    0016H     0004H     UNIT         ?DT?_SOFTWARE_DELAY?TP6_BSE_LIB_DIVERS
+            DATA    001AH     0002H     UNIT         ?DT?OSCILLATOR_INIT_OSC_QUARTZ?TP6_BSE_LIB_CONFIG_GLOBALE
+            DATA    001CH     0002H     UNIT         ?DT?SOFTWARE_DELAY_10MS?TP6_BSE_LIB_DIVERS
+            DATA    001EH     0001H     UNIT         ?DT?ISR_TIMER2?TP6_BSE_MAIN
+                    001FH     0001H                  *** GAP ***
+            BIT     0020H.0   0000H.2   UNIT         ?BI?TP6_BSE_MAIN
+                    0020H.2   0000H.6                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0024H     UNIT         ?PR?CONFIG_TIMER2_TIMEBASE?TP6_BSE_MAIN
+                    0027H     0004H                  *** GAP ***
+            CODE    002BH     0003H     ABSOLUTE     
+            CODE    002EH     004FH     UNIT         ?C?LIB_CODE
+                    007DH     0006H                  *** GAP ***
+            CODE    0083H     0003H     ABSOLUTE     
+            CODE    0086H     000DH     UNIT         ?PR?CONFIG_INT7?TP6_BSE_MAIN
+            CODE    0093H     0003H     ABSOLUTE     
+                    0096H     0005H                  *** GAP ***
+            CODE    009BH     0003H     ABSOLUTE     
+            CODE    009EH     00F9H     UNIT         ?PR?ISR_TIMER2?TP6_BSE_MAIN
+            CODE    0197H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0223H     004BH     UNIT         ?PR?ISR_TIMER4?TP6_BSE_MAIN
+            CODE    026EH     0040H     UNIT         ?PR?PORT_IO_INIT?TP6_BSE_LIB_CONFIG_GLOBALE
+            CODE    02AEH     0035H     UNIT         ?PR?OSCILLATOR_INIT_OSC_QUARTZ?TP6_BSE_LIB_CONFIG_GLOBALE
+            CODE    02E3H     0023H     UNIT         ?PR?_SOFTWARE_DELAY?TP6_BSE_LIB_DIVERS
+            CODE    0306H     0020H     UNIT         ?PR?CONFIG_TIMER4_EVENT_COUNTER?TP6_BSE_MAIN
+            CODE    0326H     001CH     UNIT         ?PR?SOFTWARE_DELAY_10MS?TP6_BSE_LIB_DIVERS
+            CODE    0342H     001AH     UNIT         ?C_INITSEG
+            CODE    035CH     0017H     UNIT         ?PR?MAIN?TP6_BSE_MAIN
+            CODE    0373H     000FH     UNIT         ?PR?ISR_INT6?TP6_BSE_MAIN
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/20/2022  11:47:10  PAGE 2
+
+
+            CODE    0382H     000DH     UNIT         ?PR?CONFIG_INT6?TP6_BSE_MAIN
+            CODE    038FH     000AH     UNIT         ?PR?INIT_DEVICE?TP6_BSE_LIB_CONFIG_GLOBALE
+            CODE    0399H     000AH     UNIT         ?PR?SOFTWARE_DELAY_10MICRO?TP6_BSE_LIB_DIVERS
+            CODE    03A3H     000AH     UNIT         ?PR?ISR_INT7?TP6_BSE_MAIN
+            CODE    03ADH     0007H     UNIT         ?PR?RESET_SOURCES_INIT?TP6_BSE_LIB_CONFIG_GLOBALE
+
+
+
+OVERLAY MAP OF MODULE:   BSE_TP4 (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?TP6_BSE_MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?TP6_BSE_MAIN
+  +--> ?PR?INIT_DEVICE?TP6_BSE_LIB_CONFIG_GL...
+  +--> ?PR?CONFIG_INT7?TP6_BSE_MAIN
+  +--> ?PR?CONFIG_INT6?TP6_BSE_MAIN
+  +--> ?PR?CONFIG_TIMER2_TIMEBASE?TP6_BSE_MAIN
+  +--> ?PR?CONFIG_TIMER4_EVENT_COUNTER?TP6_B...
+
+?PR?INIT_DEVICE?TP6_BSE_LIB_CONFIG_GL...
+  +--> ?PR?RESET_SOURCES_INIT?TP6_BSE_LIB_CO...
+  +--> ?PR?PORT_IO_INIT?TP6_BSE_LIB_CONFIG_G...
+  +--> ?PR?OSCILLATOR_INIT_OSC_QUARTZ?TP6_BS...
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   GETKEY
+
+
+
+SYMBOL TABLE OF MODULE:  BSE_TP4 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0197H         SEGMENT       ?C_C51STARTUP
+  I:0021H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:019AH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/20/2022  11:47:10  PAGE 3
+
+
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0197H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0197H         LINE#         133
+  C:0199H         LINE#         134
+  C:019AH         LINE#         135
+  C:019BH         LINE#         136
+  C:019DH         LINE#         185
+  C:01A0H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        TP6_BSE_LIB_CONFIG_GLOBALE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00FFH         PUBLIC        WDTCN
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:0086H         PUBLIC        P6
+  D:00E8H         PUBLIC        ADC0CN
+  D:00A4H         PUBLIC        P0MDOUT
+  C:02AEH         PUBLIC        Oscillator_Init_Osc_Quartz
+  D:00A5H         PUBLIC        P1MDOUT
+  D:00A8H         PUBLIC        IE
+  D:00A6H         PUBLIC        P2MDOUT
+  D:00A7H         PUBLIC        P3MDOUT
+  C:026EH         PUBLIC        Port_IO_Init
+  D:00D8H         PUBLIC        PCA0CN
+  D:00B8H         PUBLIC        IP
+  D:00E1H         PUBLIC        XBR0
+  D:00E2H         PUBLIC        XBR1
+  D:00E3H         PUBLIC        XBR2
+  D:00C0H         PUBLIC        SMB0CN
+  D:00F8H         PUBLIC        SPI0CN
+  D:00B5H         PUBLIC        P74OUT
+  D:0088H         PUBLIC        TCON
+  D:00B2H         PUBLIC        OSCICN
+  C:03ADH         PUBLIC        Reset_Sources_Init
+  C:038FH         PUBLIC        Init_Device
+  D:00B1H         PUBLIC        OSCXCN
+  D:0098H         PUBLIC        SCON0
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          RESET_SOURCES_INIT
+  C:03ADH         LINE#         11
+  C:03ADH         LINE#         12
+  C:03ADH         LINE#         14
+  C:03B0H         LINE#         15
+  C:03B3H         LINE#         16
+  -------         ENDPROC       RESET_SOURCES_INIT
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/20/2022  11:47:10  PAGE 4
+
+
+  -------         PROC          PORT_IO_INIT
+  C:026EH         LINE#         22
+  C:026EH         LINE#         23
+  C:026EH         LINE#         36
+  C:0271H         LINE#         37
+  C:0274H         LINE#         38
+  C:0277H         LINE#         41
+  C:027AH         LINE#         43
+  C:027DH         LINE#         44
+  C:0280H         LINE#         47
+  C:0283H         LINE#         48
+  C:0286H         LINE#         50
+  C:0289H         LINE#         51
+  C:028CH         LINE#         53
+  C:028FH         LINE#         54
+  C:0292H         LINE#         56
+  C:0295H         LINE#         57
+  C:0298H         LINE#         59
+  C:029BH         LINE#         61
+  C:029EH         LINE#         62
+  C:02A1H         LINE#         64
+  C:02A4H         LINE#         65
+  C:02A7H         LINE#         67
+  C:02AAH         LINE#         68
+  C:02ADH         LINE#         70
+  -------         ENDPROC       PORT_IO_INIT
+  -------         PROC          OSCILLATOR_INIT_OSC_QUARTZ
+  -------         DO            
+  D:001AH         SYMBOL        i
+  -------         ENDDO         
+  C:02AEH         LINE#         73
+  C:02AEH         LINE#         74
+  C:02AEH         LINE#         75
+  C:02B4H         LINE#         76
+  C:02B7H         LINE#         77
+  C:02D4H         LINE#         78
+  C:02DFH         LINE#         79
+  C:02E2H         LINE#         80
+  -------         ENDPROC       OSCILLATOR_INIT_OSC_QUARTZ
+  -------         PROC          INIT_DEVICE
+  C:038FH         LINE#         86
+  C:038FH         LINE#         87
+  C:038FH         LINE#         88
+  C:0392H         LINE#         89
+  C:0395H         LINE#         90
+  C:0398H         LINE#         91
+  -------         ENDPROC       INIT_DEVICE
+  -------         ENDMOD        TP6_BSE_LIB_CONFIG_GLOBALE
+
+  -------         MODULE        TP6_BSE_LIB_DIVERS
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0399H         PUBLIC        Software_Delay_10micro
+  D:00E8H         PUBLIC        ADC0CN
+  D:00A8H         PUBLIC        IE
+  D:00D8H         PUBLIC        PCA0CN
+  D:00B8H         PUBLIC        IP
+  C:02E3H         PUBLIC        _Software_Delay
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/20/2022  11:47:10  PAGE 5
+
+
+  D:00C0H         PUBLIC        SMB0CN
+  D:00F8H         PUBLIC        SPI0CN
+  D:0088H         PUBLIC        TCON
+  C:0326H         PUBLIC        Software_Delay_10ms
+  D:0098H         PUBLIC        SCON0
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          SOFTWARE_DELAY_10MS
+  -------         DO            
+  D:001CH         SYMBOL        i
+  -------         ENDDO         
+  C:0326H         LINE#         11
+  C:0326H         LINE#         12
+  C:0326H         LINE#         14
+  C:0341H         LINE#         15
+  -------         ENDPROC       SOFTWARE_DELAY_10MS
+  -------         PROC          _SOFTWARE_DELAY
+  D:0016H         SYMBOL        hundredth_second
+  -------         DO            
+  D:0018H         SYMBOL        i
+  -------         ENDDO         
+  C:02E3H         LINE#         25
+  C:02E7H         LINE#         26
+  C:02E7H         LINE#         29
+  C:02F8H         LINE#         30
+  C:02F8H         LINE#         31
+  C:02FBH         LINE#         32
+  C:0305H         LINE#         33
+  -------         ENDPROC       _SOFTWARE_DELAY
+  -------         PROC          SOFTWARE_DELAY_10MICRO
+  C:0399H         LINE#         40
+  C:0399H         LINE#         41
+  C:0399H         LINE#         44
+  C:039AH         LINE#         45
+  C:039BH         LINE#         46
+  C:039CH         LINE#         47
+  C:039DH         LINE#         48
+  C:039EH         LINE#         49
+  C:039FH         LINE#         50
+  C:03A0H         LINE#         51
+  C:03A1H         LINE#         52
+  C:03A2H         LINE#         53
+  -------         ENDPROC       SOFTWARE_DELAY_10MICRO
+  -------         ENDMOD        TP6_BSE_LIB_DIVERS
+
+  -------         MODULE        TP6_BSE_MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:0020H.1       PUBLIC        Event
+  C:009EH         PUBLIC        ISR_Timer2
+  D:00CCH         PUBLIC        T2
+  B:00A8H.7       PUBLIC        EA
+  D:00E7H         PUBLIC        EIE2
+  D:0086H         PUBLIC        P6
+  C:0223H         PUBLIC        ISR_Timer4
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/20/2022  11:47:10  PAGE 6
+
+
+  D:00F4H         PUBLIC        T4
+  D:00E8H         PUBLIC        ADC0CN
+  D:00A8H         PUBLIC        IE
+  D:00F7H         PUBLIC        EIP2
+  D:00ADH         PUBLIC        P3IF
+  B:00C8H.6       PUBLIC        EXF2
+  D:00D8H         PUBLIC        PCA0CN
+  D:00B8H         PUBLIC        IP
+  C:0306H         PUBLIC        Config_Timer4_Event_Counter
+  D:00C0H         PUBLIC        SMB0CN
+  C:035CH         PUBLIC        main
+  B:00B0H.5       PUBLIC        VISU_INT_TIMER2
+  B:00B0H.4       PUBLIC        VISU_INT_TIMER4
+  D:00F8H         PUBLIC        SPI0CN
+  D:0088H         PUBLIC        TCON
+  D:000EH         PUBLIC        Event_to_Count
+  B:00B0H.3       PUBLIC        SIG_OUT
+  D:0010H         PUBLIC        frequence
+  B:00C8H.1       PUBLIC        CT2
+  B:00A8H.5       PUBLIC        ET2
+  B:00A0H.4       PUBLIC        VISU_INT7
+  B:00C8H.7       PUBLIC        TF2
+  B:0090H.6       PUBLIC        LED
+  B:00B8H.5       PUBLIC        PT2
+  B:00C8H.2       PUBLIC        TR2
+  D:00CAH         PUBLIC        RCAP2
+  D:00E4H         PUBLIC        RCAP4
+  C:0382H         PUBLIC        Config_INT6
+  C:0086H         PUBLIC        Config_INT7
+  B:00C8H.5       PUBLIC        RCLK0
+  B:00C8H.4       PUBLIC        TCLK0
+  C:0003H         PUBLIC        Config_Timer2_TimeBase
+  B:00C8H.3       PUBLIC        EXEN2
+  B:00C8H.0       PUBLIC        CPRL2
+  D:0098H         PUBLIC        SCON0
+  D:0014H         PUBLIC        CP_Overflow_Timer4
+  D:00C8H         PUBLIC        T2CON
+  D:00C9H         PUBLIC        T4CON
+  D:008EH         PUBLIC        CKCON
+  C:0373H         PUBLIC        ISR_INT6
+  C:03A3H         PUBLIC        ISR_INT7
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:035CH         LINE#         41
+  C:035CH         LINE#         46
+  C:035FH         LINE#         49
+  C:0362H         LINE#         50
+  C:0365H         LINE#         51
+  C:0368H         LINE#         52
+  C:036BH         LINE#         55
+  C:036DH         LINE#         58
+  C:036DH         LINE#         59
+  C:0370H         LINE#         62
+  -------         ENDPROC       MAIN
+  -------         PROC          CONFIG_INT7
+  C:0086H         LINE#         66
+  C:0086H         LINE#         67
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/20/2022  11:47:10  PAGE 7
+
+
+  C:0086H         LINE#         68
+  C:0089H         LINE#         69
+  C:008CH         LINE#         71
+  C:008FH         LINE#         72
+  C:0092H         LINE#         73
+  -------         ENDPROC       CONFIG_INT7
+  -------         PROC          ISR_INT7
+  C:03A3H         LINE#         75
+  C:03A3H         LINE#         77
+  C:03A5H         LINE#         78
+  C:03A8H         LINE#         79
+  C:03AAH         LINE#         80
+  C:03ACH         LINE#         81
+  -------         ENDPROC       ISR_INT7
+  -------         PROC          CONFIG_INT6
+  C:0382H         LINE#         85
+  C:0382H         LINE#         86
+  C:0382H         LINE#         87
+  C:0385H         LINE#         88
+  C:0388H         LINE#         90
+  C:038BH         LINE#         91
+  C:038EH         LINE#         92
+  -------         ENDPROC       CONFIG_INT6
+  -------         PROC          ISR_INT6
+  C:0373H         LINE#         95
+  C:0373H         LINE#         97
+  C:0376H         LINE#         98
+  C:0379H         LINE#         99
+  C:037CH         LINE#         100
+  C:037EH         LINE#         101
+  C:0381H         LINE#         102
+  -------         ENDPROC       ISR_INT6
+  -------         PROC          CONFIG_TIMER2_TIMEBASE
+  C:0003H         LINE#         106
+  C:0003H         LINE#         107
+  C:0003H         LINE#         108
+  C:0006H         LINE#         110
+  C:0008H         LINE#         111
+  C:000AH         LINE#         112
+  C:000CH         LINE#         113
+  C:000EH         LINE#         114
+  C:0010H         LINE#         115
+  C:0012H         LINE#         116
+  C:0014H         LINE#         118
+  C:001AH         LINE#         119
+  C:0020H         LINE#         120
+  C:0022H         LINE#         121
+  C:0024H         LINE#         123
+  C:0026H         LINE#         124
+  -------         ENDPROC       CONFIG_TIMER2_TIMEBASE
+  -------         PROC          ISR_TIMER2
+  -------         DO            
+  D:0008H         SYMBOL        CP_Cligno
+  D:0009H         SYMBOL        CP_Seconde
+  B:0020H.0       SYMBOL        STATE_LED
+  D:001EH         SYMBOL        Read_Cfg_Event
+  D:000AH         SYMBOL        CP_Timer4
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/20/2022  11:47:10  PAGE 8
+
+
+  D:000CH         SYMBOL        OLD_CP_Timer4
+  -------         ENDDO         
+  C:009EH         LINE#         127
+  C:00BBH         LINE#         136
+  C:00BDH         LINE#         139
+  C:00C3H         LINE#         140
+  C:00C3H         LINE#         141
+  C:00C5H         LINE#         145
+  C:00C7H         LINE#         146
+  C:00D9H         LINE#         147
+  C:00D9H         LINE#         148
+  C:00DCH         LINE#         149
+  C:00DFH         LINE#         150
+  C:00E5H         LINE#         151
+  C:00E8H         LINE#         154
+  C:0126H         LINE#         156
+  C:012CH         LINE#         157
+  C:0132H         LINE#         159
+  C:0132H         LINE#         162
+  C:0135H         LINE#         163
+  C:0135H         LINE#         164
+  C:0137H         LINE#         165
+  C:0139H         LINE#         166
+  C:0139H         LINE#         168
+  C:013BH         LINE#         169
+  C:0150H         LINE#         170
+  C:0153H         LINE#         171
+  C:0153H         LINE#         172
+  C:0169H         LINE#         173
+  C:016BH         LINE#         174
+  C:016DH         LINE#         175
+  C:016FH         LINE#         176
+  C:0175H         LINE#         178
+  C:0175H         LINE#         181
+  C:0178H         LINE#         182
+  C:0178H         LINE#         183
+  C:017AH         LINE#         184
+  C:017AH         LINE#         186
+  C:017CH         LINE#         187
+  -------         ENDPROC       ISR_TIMER2
+  -------         PROC          CONFIG_TIMER4_EVENT_COUNTER
+  C:0306H         LINE#         191
+  C:0306H         LINE#         192
+  C:0306H         LINE#         201
+  C:0309H         LINE#         207
+  C:0316H         LINE#         208
+  C:031CH         LINE#         209
+  C:031FH         LINE#         210
+  C:0322H         LINE#         211
+  C:0325H         LINE#         212
+  -------         ENDPROC       CONFIG_TIMER4_EVENT_COUNTER
+  -------         PROC          ISR_TIMER4
+  C:0223H         LINE#         215
+  C:022EH         LINE#         219
+  C:0230H         LINE#         221
+  C:023BH         LINE#         222
+  C:023BH         LINE#         223
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/20/2022  11:47:10  PAGE 9
+
+
+  C:023EH         LINE#         224
+  C:0240H         LINE#         227
+  C:024DH         LINE#         229
+  C:0255H         LINE#         230
+  C:0255H         LINE#         233
+  C:0260H         LINE#         234
+  C:0263H         LINE#         236
+  C:0265H         LINE#         237
+  -------         ENDPROC       ISR_TIMER4
+  -------         ENDMOD        TP6_BSE_MAIN
+
+  -------         MODULE        ?C?LMUL
+  C:002EH         PUBLIC        ?C?LMUL
+  -------         ENDMOD        ?C?LMUL
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SOFTWARE_DELAY?TP6_BSE_LIB_DIVERS
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SOFTWARE_DELAY_10MICRO?TP6_BSE_LIB_DIVERS
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  GETKEY
+    MODULE:  TP6_BSE_Main.obj (TP6_BSE_MAIN)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  GETKEY
+    MODULE:  TP6_BSE_Main.obj (TP6_BSE_MAIN)
+    ADDRESS: 036EH
+
+Program Size: data=32.2 xdata=0 code=933
+LINK/LOCATE RUN COMPLETE.  4 WARNING(S),  0 ERROR(S)
