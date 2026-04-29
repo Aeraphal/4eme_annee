@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/fs03/share/users/alexandre.jolin/home/Documents/ProgC++/TP1/code/01_tutorial_compilation/01_fichier_unique/04_cmake/src/main.cpp
+iostream
+-
+string
+-
+
