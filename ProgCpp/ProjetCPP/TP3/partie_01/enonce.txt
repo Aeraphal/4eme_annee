@@ -1,0 +1,35 @@
+Introduction:
+
+Voici un programme minimaliste utilisant Qt version 5 (https://doc.qt.io/qt-5.15/), une bibliothèque de développement permettant de gérer facilement des interfaces utilisateurs (boutons, fenêtres, évènements ...) de manière portable entre plateformes.
+
+===================================================
+
+
+1. Fichier Hello_world.cpp 
+--------------------------
+
+Considérons le cas du fichier hello_wold.cpp (dans le répertoire src/).
+
+Observez celui-ci avec un éditeur de texte quelconque.
+
+Il s'agit d'un fichier contenant du code C++ et utilisant la librairie Qt.
+- QApplication (https://doc.qt.io/qt-5/qapplication.html) est un objet Qt permettant de gérer l'interface. 
+Le lancement de l'interface est réalisé par le dernier l'appel QApplication.exec()
+- QPushButton (https://doc.qt.io/qt-5/qpushbutton.html) est ce que l'on appelle un widget, c'est à dire un "élément graphique interactif" tel qu'un bouton, une entrée utilisateur, une horloge, etc. que l'on peut venir placer dans une fenêtre. Ici il s'agit d'un bouton sur lequel on peut cliquer.
+
+
+2. Compilation par le biais de QMake
+-------------------------------------
+
+Placez vous dans le répertoire en amont de src/ .
+
+Utilisez la démarche de compilation vue lors du premier TP (qmake -project puis qmake partie_01.pro ) pour générer un nouveau Makefile à l'aide de l'outil QMake. Vous devriez avoir un fichier partie_01.pro dans le répertoire partie_01. Ajoutez à la fin du fichier les composants Qt nécéssaires (indiqués QT += ... dans la doc), ici  QT += widgets.
+
+3. Modification du code
+------------------------
+
+Chargez le projet à l'aide de QtCreator à partir du fichier .pro (ou à partir de votre IDE habituel)
+$ qtcreator partie_1.pro
+
+-> Créez un second bouton dans ce même programme. Observez le résultat.
+

@@ -1,0 +1,6 @@
+Ce programme propose la gestion du temps à l'aide d'un timer et permet la simulation d'un cercle qui rebondit sur le sol et les murs.
+Ici, le cercle est attiré par le sol suivant une force d'attraction de la pesanteur.
+La mise à jour est réalisée toute les 30ms.
+
+-> Observez le comportement de ce programme.
+-> Enlever les contraintes de rebonds et observez que la cercle sort alors de la fenêtre d'affichage.

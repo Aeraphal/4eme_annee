@@ -1,0 +1,32 @@
+Cette partie introduit la gestion des évènements lors d'un clic de bouton.
+Pour cela, Qt possède sa propre gestion de signaux.
+
+On définit une classe particulière maFenetre est un élément graphique particulier (hérite de QWidget).
+Notez la présence du mot clé Q_OBJECT en début de classe dans le fichier maFenetre.hpp.
+
+Qt introduit de nouveaux mots clés dans les propriétés des méthodes en plus de public et private.
+Le mot clé "slot" indique que ce sont des méthodes qui peuvent être connectées à la réception d'un signal Qt. C'est à dire des méthodes appelées lorsqu'un certain signal est émis (par le clic sur un bouton par exemple).
+
+Les mots clés particuliers à Qt (slots, signal, Q_OBJECT, ...) ne font pas partis du C++ standard. Ils doivent être analysés et convertis dans du code C++ avant le passage du compilateur habituel.
+La conversion est réalisée par un outil spécifique appelé le MOC (Meta Object Compiler https://doc.qt.io/qt-5/moc.html) qui viens générer des fichiers supplémentaires (débutant par moc_). Ce fichier contient une table de correspondance permettant de faire le lien entre les fonctions émettant des signaux et les fonctions les recevant.
+
+Il est donc nécessaire d'appeler MOC sur le fichier source avant la compilation de ce fichier.
+
+-> Créez potentiellement le fichier .pro de manière habituelle si vous le souhaitez (peut nécessiter d'ajouter l'utilisation de C++11 dans le fichier .pro (QMAKE_CXXFLAGS) ).
+
+-> Le fichier CMakeLists.txt présente une alternative à l'utilisation de QMake.
+-> Observez ce fichier. Notez que set(CMAKE_AUTOMOC ON) permet de désigner tous les fichiers d'en tête étant des Q_OBJECT (information nécessaire pour le passage du MOC).
+-> Utilisez ce fichier pour compiler votre projet avec CMake en suivant la démarche vue dans le premier TP (n'oubliez pas générez vos fichiers temporaire dans un répertoire build/ par exemple et non pas à la racine. N'oubliez pas non plus d'enlever tout fichier temporaire laissé par l'utilisation de qmake).
+
+-> Observez l'ordonnancement de l'exécution du projet (affichage en ligne de commande, et retrouvez ces lignes dans le programme).
+-> Observez la gestion des signaux dans le fichier maFenetre.cpp à l'aide de la commande connect.
+La syntaxe est la suivante:
+  connect([objet générant un signal],SIGNAL([nom du signal émit]),[objet receptionnant le signal],SLOT([méthode appelée à la reception du signal])) -> https://doc.qt.io/qt-5/signalsandslots.html
+
+-> Notez que la présence des deux slots de maFenetre sont appelées d'après une table de correspondance (switch(_id)) dans le fichier moc. Le fichier moc permet d'encoder en C++ la correspondance entre un signal et la méthode à appeler.
+
+-> Ajoutez un autre bouton au Widget. Faite en sorte que l'appui sur ce bouton vienne selectionner les 2 "checkBox".
+
+
+
+
