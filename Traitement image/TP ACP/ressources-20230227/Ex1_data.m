@@ -1,0 +1,115 @@
+clear variables;
+close all;
+
+% Exercice 2 : habitudes alimentaires 
+data=  [68	76	127	60	72	68	84	68	82;
+        2	4	3	3	2	3	2	2	4;
+        81	74	41	81	101	102	111	68	70;
+        36	34	31	37	35	40	42	44	24;
+        64	115	172	82	60	76	83	57	237;
+        89	53	69	84	64	33	30	38	57;
+        25	93	87	13	66	6	3	14	45;
+        6	12	20	4	4	8	8	7	22;
+        7	3	1	12	10	6	4	12	1;
+        24	33	25	21	28	23	23	13	20;
+        58	38	24	41	41	26	32	51	18;
+        84	90	80	136	87	14	14	9	13;
+        85	91	84	135	89	134	187	159	64;
+        6	7	2	3	8	5	11	6	1;
+        12	18	13	13	10	6	3	10	8;
+        17	15	11	11	14	14	14	14	12];
+
+% tab_1={ 'RFA' 3;
+%         'France' 6;
+%         'Italie' 6;
+%         'Pays Bas' 8;
+%         'Belg. Lux.' 10;	
+%         'Russie' 6;
+%         'Irlande' 7;
+%         'Danemark' 8;	
+%         'Grece' 5};  
+tab_1={ 'RFA';
+        'France';
+        'Italie';
+        'Pays Bas';
+        'Belg. Lux.';	
+        'Russie';
+        'Irlande';
+        'Danemark';	
+        'Grece'};  
+    
+tab_2={ 'Cereales';
+        'Riz';
+        'Pommes de terre';
+        'Sucre blanc';
+        'Legumes';
+        'Fruits';
+        'Vin';
+        'Huiles vegetales';
+        'Margarine';
+        'Viande bov.';
+        'Viande porc.';
+        'Volailles';
+        'Lait et deriv.';
+        'Beurre';
+        'Fromages';
+        'Oeufs' }; 
+    
+Y = data';
+[n,m] = size(Y);
+
+X = Y - mean(Y);
+
+M = X'*X/n;
+
+[P,D] = eig(M);
+lambda = flipud(diag(real(D)));
+P = fliplr(P);
+figure(1);
+stem(lambda);
+%disp(P);
+
+Tau = lambda./sum(lambda);
+figure(2);
+stem(Tau*100);
+Xstar = X*P(:,1:4);
+
+figure(3);
+subplot(311);
+
+plot(Xstar(:,1),Xstar(:,2),'*');
+text(Xstar(:,1),Xstar(:,2),tab_1);
+title('Analyse en composantes principales');
+xlabel('e1'); ylabel('e2');
+
+subplot(312);
+plot(Xstar(:,1),Xstar(:,3),'*');
+text(Xstar(:,1),Xstar(:,3),tab_1);
+title('Analyse en composantes secondaires');
+xlabel('e1'); ylabel('e3');
+
+subplot(313);
+plot(Xstar(:,2),Xstar(:,3),'*');
+text(Xstar(:,2),Xstar(:,3),tab_1);
+title('Analyse en composantes secondaires');
+xlabel('e2'); ylabel('e3');
+
+Z = X./(ones(n,1)*std(Y));
+
+Corr = zeros(n,m);
+for j = 1:m
+    for k =1: 4
+        Corr(j,k) = Z(:,j)'*(Xstar(:,k)/(n*sqrt(lambda(k))));
+    end 
+end
+
+figure(4);
+hold on;
+plot(Corr(:,1),Corr(:,2),'o');
+text(Corr(:,1),Corr(:,2),tab_2);
+Radius = 1;
+[x,y,z] = cylinder(Radius,200);
+plot(x(2,:),y(1,:),'k-');
+title('Cercle de corrélation');
+xlabel('e1'); ylabel('e2');
+axis equal;
