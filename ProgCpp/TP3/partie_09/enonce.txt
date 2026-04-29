@@ -1,0 +1,12 @@
+Ce programme étend le précédent avec différents sliders modifiant les paramètre de la simulation.
+Il permet également l'utilisation de la souris pour interagir avec le cercle et le lancer dans différentes directions.
+
+La sphère peut se "lancer" en utilisant une approche de type "drag and drop".
+-> Sélectionnez la sphère en cliquant dessus avec la souris.
+-> Tout en restant cliqué, lancez celle ci avec un geste plus ou moins ample et rapide avant de "relâcher" celle-ci.
+
+Cet effet est obtenu dans le code en calculant une vitesse initiale lors du "drop" de la sphère. Cette vitesse est obtenu en stockant et calculant une vitesse moyenne à partir des n-dernières valeurs de positions et temps du centre de la sphère.
+-> Observez cette gestion dans le code. Combien de valeurs sont stockées. 
+-> Que se passe-t-il si on stocke uniquement deux valeurs (courante et précédente) ? Pourquoi cela ne donne pas toujours le comportement attendu.
+-> Que se passe-t-il si on stocke beaucoup plus de valeurs ? Expliquez pourquoi cela n'est pas le comportement attendu.
+-> Observez la gestion des différents sliders dans le code.

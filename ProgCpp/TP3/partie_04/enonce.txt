@@ -1,0 +1,22 @@
+La partie précédente présentait une classe maFenetre permettant de gérer l'interface graphique ainsi que les actions à réaliser.
+On peut noter que cette classe mélangeait la partie purement graphique (gestion des boutons, de la grille d'affichage, etc) et la partie d'action (gestion des slots, etc).
+
+Dans le cas d'une interface graphique avancées cela engendre des classes à la fois complexes et difficile à manipuler. Dans une optique des développement méthodologique, il est conseillé de séparer la partie GUI (interface graphique pure) de la gestion du comportement (Architecture MVC: Model-View-Controller).
+
+Qt permet de manipuler aisément le placement graphique des boutons à l'aide de QtDesigner qui possède l'avantage de:
+- Séparer code du modèle graphique
+- Simplifier la gestion du placement des boutons.
+
+-> Observez le CMakeLists.txt fourni. Notez que celui-ci fait appel à un programme uic (automatiquement) permettant de convertir le fichier de configuration xml de l'interface graphique mainwindow.ui vers un fichier source ui_mainwindow.h.
+-> Créez le fichier .pro de manière habituelle ou utilisez le CMakeLists.txt pour éditer votre code avec QtCreator si vous le souhaitez.
+-> Compilez et exécutez le projet.
+-> Quels fichiers ont été générés lors de la compilation ?
+
+-> Observez que la classe meFenetre ne gère que les actions à réaliser.
+-> Visualisez le fichier mainwindow.ui dans le formulaire.
+-> Ouvrez ce même fichier avec un éditeur de texte, observez qu'il s'agit d'un fichier xml décrivant le type et placement des boutons.
+-> Observez le fichier ui_mainwidow.h. Ce fichier est généré automatiquement par l'outil "uic" (user interface compiler) de Qt qui permet de convertir le fichier mainwindow.ui (en xml) vers le fichier ui_mainwindow.h (en C++).
+
+-> Modifier le programme pour que le clic sur le bouton 1 vienne copier le contenu textuelle du menu (Widget de type QLineEdit) à la place du mot Légende (Widget de type QLabel).
+
+

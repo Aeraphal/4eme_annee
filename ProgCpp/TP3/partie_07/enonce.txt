@@ -1,0 +1,32 @@
+Cette partie est obsolète (QGLWidget est déprécié et opengl 2.x aussi) mais fonctionne donc avec Virtualbox
+
+Sous windows il faut ajouter le dossier extern utilisé en TSI (seul glew est util) dans le dossier contenant CMakeLists.txt
+
+Cette partie introduit un contexte OpenGL dans un Widget Qt.
+Il affiche un triangle à l'aide de shaders minimaliste.
+
+-> Assurez vous que le programme compile et s'execute à partir du CMakeLists.txt fourni.
+
+Pour la compilation avec QMake (non fonctionnel sous windows):
+-> Créez le .pro de manière habituelle.
+-> Ajoutez les 3 lignes
+ QT += widgets opengl
+ LIBS += -lGLU -lGLEW
+ QMAKE_CXXFLAGS += -g -Wall -Wextra -std=c++11
+dans le fichier .pro pour indiquer la dépendance à openGL et lier le projet à la librairie GLU et GLEW.
+Cette opération devra être répétée pour chaque exemple utilisant OpenGL
+
+-> Compilez le projet et exécutez le.
+-> Chargez le projet avec QtCreator
+-> Observez l'ordonnancement lors de l’exécution.
+Cette fois, la classe maFenetre contient un Widget particulier (monWidgetGL) qui hérite lui même d'un QGLWidget.
+Un QGLWidget est un élément graphique qui possède des méthodes liées à OpenGL.
+* initializeGL(); permet d'initialiser le contexte
+* paintGL(); est la méthode appelée lors de l'affichage.
+
+-> Comprenez le fonctionnement du programme.
+-> Suivez le cheminement de l'action lors du clic sur un bouton (wireframe ou afficher).
+
+-> Compilez le programme avec CMake et le CMakeLists.txt fourni
+
+Réaliser une scène plus complexe reviendrais ici à ajouter des données pour OpenGL, et à ajouter des boutons et connections. Vous avez ainsi les éléments de bases permettant de réaliser des scènes 3D interactives avancées.

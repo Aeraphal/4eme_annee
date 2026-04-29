@@ -1,0 +1,7 @@
+La fenetre Qt contient un QPixmap sur lequel on peut dessiner en 2D.
+Pour cela, on fait appel à un QPainter dans la classe render_area qui possède différentes méthodes d'affichage de primitives vectorielles.
+
+-> Observez le comportement de ce programme et le code de dessin associé.
+
+-> En utilisant la classe QPixmap déjà présente dans la classe, chargez une image (au format jpg par exemple) lors de l'étape d'initialisation dans le constructeur (pixmap->load()). 
+-> Affichez votre image dans la fenêtre lors de l'étape d'affichage (painter.drawPixmap()). Notez que la classe pixmap contient une méthode "scaled" si vous souhaitez modifier ses dimensions.

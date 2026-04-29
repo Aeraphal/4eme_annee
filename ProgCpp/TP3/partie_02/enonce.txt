@@ -1,0 +1,15 @@
+
+Cette partie viens cette fois placer un ensemble de boutons et de cases à cocher (Checkbox) dans un même élément graphique (Widget). Notez que la documentation de tous les éléments de Qt sont disponibles sur internet.
+(ex. https://doc.qt.io/qt-5/qcheckbox.html)
+Dans ce programme, les boutons ne sont pas liés à d'actions, ils sont donc pour l'instant sans effets.
+
+
+Créez le .pro correspondant à ce projet.
+Observez le code à l'aide de QtCreator (ou autre IDE).
+Compilez puis exécutez ce code (à l'aide du .pro).
+
+
+-> Pourquoi l'appui sur le bouton "Quit" ne ferme pas le programme?
+-> Modifiez les coordonnées du bouton dans la grille d'affichage afin de comprendre la gestion du positionnement des boutons par un "GridLayout".
+-> Modifiez le programme pour que le "checkBox1" soit coché au début du programme.
+-> Modifiez le programme pour ajouter deux "radioButton". Observez qu'il ne peut y avoir qu'un seul bouton radio activé à la fois.

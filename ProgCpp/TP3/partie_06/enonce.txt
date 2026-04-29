@@ -1,0 +1,12 @@
+Dans ce programme, le cercle peut être manipulé interactivement à l'aide de la souris.
+
+-> Notez l'utilisation des fonctions mousePressEvent et mouseMoveEvent.
+-> Faites en sorte que votre cercle change de couleur lorsque vous double cliquez dessus. On pourra réaliser une permutation circulaire entre 3 couleurs, et utiliser la méthode mouseDoubleClickEvent pour détecter un double clic.
+
+Nous allons désormais ouvrir une nouvelle fenêtre de sélection avancée de couleur.
+
+-> Ajoutez un composant de type QColorDialog à votre classe render_area.
+-> Rendez ce composant visible (show) dans le constructeur, observez la nouvelle fenêtre de sélection de couleur.
+-> Faites désormais en sorte que ce composant ne soit que visible après avoir double cliqué sur le cercle. Faites en sorte que la couleur du cercle puisse être choisie interactivement à l'aide de cette fenêtre de dialogue.
+Pour cela, on connectera le signal currentColorChanged de QColorDialog à une méthode spécifique qui viendra mettre à jour la couleur du cercle (vous n'êtes pas obligés de gérer les boutons ok et cancel dans cet exercice).
+
