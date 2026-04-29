@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/main.dir/main.cpp.o  -o main  -L/softwares/INFO/Synthese/geoalgo/DGtal/build/src -Wl,-rpath,/softwares/INFO/Synthese/geoalgo/DGtal/build/src /softwares/INFO/Synthese/geoalgo/DGtal/build/src/libDGtal.so -lboost_program_options -lz -lrt 
