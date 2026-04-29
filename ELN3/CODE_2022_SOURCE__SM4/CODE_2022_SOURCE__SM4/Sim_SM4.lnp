@@ -1,0 +1,5 @@
+"Lib_TP_SM.obj",
+"Lib_VosSP_SM4.obj",
+"Main_SM4.obj" 
+TO "Sim_SM4" 
+RAMSIZE(256) 

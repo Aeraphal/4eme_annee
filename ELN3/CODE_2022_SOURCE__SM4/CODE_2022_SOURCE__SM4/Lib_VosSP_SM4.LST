@@ -1,0 +1,812 @@
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN Lib_VosSP_SM4.OBJ
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Lib_VosSP_SM4.asm NOMOD51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------------------------------------------------------------------------
+                       2     ;
+                       3     ;  FILE NAME   :  LIB_VOSSP_SM4.ASM 
+                       4     ;  TARGET MCU  :  C8051F020 
+                       5     ;  
+                       6     
+                       7     ;-----------------------------------------------------------------------------
+                       8     ;$include (c8051f020.inc) ; Include register definition file. 
+                +1     9     ;-----------------------------------------------------------------------------
+                +1    10     ;       
+                +1    11     ;       
+                +1    12     ;
+                +1    13     ;
+                +1    14     ;       FILE NAME       : C8051F020.INC 
+                +1    15     ;       TARGET MCUs     : C8051F020, 'F021, 'F022, 'F023 
+                +1    16     ;       DESCRIPTION     : Register/bit definitions for the C8051F02x product family.  
+                +1    17     ;
+                +1    18     ;       REVISION 1.0    
+                +1    19     ;
+                +1    20     ;-----------------------------------------------------------------------------
+                +1    21     ;REGISTER DEFINITIONS
+                +1    22     ;
+  0080          +1    23     P0       DATA  080H   ; PORT 0
+  0081          +1    24     SP       DATA  081H   ; STACK POINTER
+  0082          +1    25     DPL      DATA  082H   ; DATA POINTER - LOW BYTE
+  0083          +1    26     DPH      DATA  083H   ; DATA POINTER - HIGH BYTE
+  0084          +1    27     P4       DATA  084H   ; PORT 4
+  0085          +1    28     P5       DATA  085H   ; PORT 5
+  0086          +1    29     P6       DATA  086H   ; PORT 6
+  0087          +1    30     PCON     DATA  087H   ; POWER CONTROL
+  0088          +1    31     TCON     DATA  088H   ; TIMER CONTROL
+  0089          +1    32     TMOD     DATA  089H   ; TIMER MODE
+  008A          +1    33     TL0      DATA  08AH   ; TIMER 0 - LOW BYTE
+  008B          +1    34     TL1      DATA  08BH   ; TIMER 1 - LOW BYTE
+  008C          +1    35     TH0      DATA  08CH   ; TIMER 0 - HIGH BYTE
+  008D          +1    36     TH1      DATA  08DH   ; TIMER 1 - HIGH BYTE
+  008E          +1    37     CKCON    DATA  08EH   ; CLOCK CONTROL
+  008F          +1    38     PSCTL    DATA  08FH   ; PROGRAM STORE R/W CONTROL
+  0090          +1    39     P1       DATA  090H   ; PORT 1
+  0091          +1    40     TMR3CN   DATA  091H   ; TIMER 3 CONTROL
+  0092          +1    41     TMR3RLL  DATA  092H   ; TIMER 3 RELOAD REGISTER - LOW BYTE
+  0093          +1    42     TMR3RLH  DATA  093H   ; TIMER 3 RELOAD REGISTER - HIGH BYTE
+  0094          +1    43     TMR3L    DATA  094H   ; TIMER 3 - LOW BYTE
+  0095          +1    44     TMR3H    DATA  095H   ; TIMER 3 - HIGH BYTE
+  0096          +1    45     P7       DATA  096H   ; PORT 7
+  0098          +1    46     SCON0    DATA  098H   ; SERIAL PORT 0 CONTROL
+  0099          +1    47     SBUF0    DATA  099H   ; SERIAL PORT 0 BUFFER
+  009A          +1    48     SPI0CFG  DATA  09AH   ; SERIAL PERIPHERAL INTERFACE 0 CONFIGURATION
+  009B          +1    49     SPI0DAT  DATA  09BH   ; SERIAL PERIPHERAL INTERFACE 0 DATA
+  009C          +1    50     ADC1     DATA  09CH   ; ADC 1 DATA
+  009D          +1    51     SPI0CKR  DATA  09DH   ; SERIAL PERIPHERAL INTERFACE 0 CLOCK RATE CONTROL
+  009E          +1    52     CPT0CN   DATA  09EH   ; COMPARATOR 0 CONTROL
+  009F          +1    53     CPT1CN   DATA  09FH   ; COMPARATOR 1 CONTROL 
+  00A0          +1    54     P2       DATA  0A0H   ; PORT 2
+  00A1          +1    55     EMI0TC   DATA  0A1H   ; EMIF TIMING CONTROL
+  00A3          +1    56     EMI0CF   DATA  0A3H   ; EXTERNAL MEMORY INTERFACE (EMIF) CONFIGURATION
+  00A4          +1    57     P0MDOUT  DATA  0A4H   ; PORT 0 OUTPUT MODE CONFIGURATION
+  00A5          +1    58     P1MDOUT  DATA  0A5H   ; PORT 1 OUTPUT MODE CONFIGURATION
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     2
+
+  00A6          +1    59     P2MDOUT  DATA  0A6H   ; PORT 2 OUTPUT MODE CONFIGURATION
+  00A7          +1    60     P3MDOUT  DATA  0A7H   ; PORT 3 OUTPUT MODE CONFIGURATION
+  00A8          +1    61     IE       DATA  0A8H   ; INTERRUPT ENABLE
+  00A9          +1    62     SADDR0   DATA  0A9H   ; SERIAL PORT 0 SLAVE ADDRESS
+  00AA          +1    63     ADC1CN  DATA  0AAH   ; ADC 1 CONTROL
+  00AB          +1    64     ADC1CF   DATA  0ABH   ; ADC 1 ANALOG MUX CONFIGURATION
+  00AC          +1    65     AMX1SL   DATA  0ACH   ; ADC 1 ANALOG MUX CHANNEL SELECT
+  00AD          +1    66     P3IF     DATA  0ADH   ; PORT 3 EXTERNAL INTERRUPT FLAGS
+  00AE          +1    67     SADEN1   DATA  0AEH   ; SERIAL PORT 1 SLAVE ADDRESS MASK
+  00AF          +1    68     EMI0CN   DATA  0AFH   ; EXTERNAL MEMORY INTERFACE CONTROL
+  00B0          +1    69     P3       DATA  0B0H   ; PORT 3
+  00B1          +1    70     OSCXCN   DATA  0B1H   ; EXTERNAL OSCILLATOR CONTROL
+  00B2          +1    71     OSCICN   DATA  0B2H   ; INTERNAL OSCILLATOR CONTROL
+  00B5          +1    72     P74OUT   DATA  0B5H   ; PORTS 4 - 7 OUTPUT MODE
+  00B6          +1    73     FLSCL    DATA  0B6H   ; FLASH MEMORY TIMING PRESCALER
+  00B7          +1    74     FLACL    DATA  0B7H   ; FLASH ACESS LIMIT 
+  00B8          +1    75     IP       DATA  0B8H   ; INTERRUPT PRIORITY
+  00B9          +1    76     SADEN0   DATA  0B9H   ; SERIAL PORT 0 SLAVE ADDRESS MASK
+  00BA          +1    77     AMX0CF   DATA  0BAH   ; ADC 0 MUX CONFIGURATION
+  00BB          +1    78     AMX0SL   DATA  0BBH   ; ADC 0 MUX CHANNEL SELECTION
+  00BC          +1    79     ADC0CF   DATA  0BCH   ; ADC 0 CONFIGURATION
+  00BD          +1    80     P1MDIN   DATA  0BDH   ; PORT 1 INPUT MODE
+  00BE          +1    81     ADC0L    DATA  0BEH   ; ADC 0 DATA - LOW BYTE
+  00BF          +1    82     ADC0H    DATA  0BFH   ; ADC 0 DATA - HIGH BYTE 
+  00C0          +1    83     SMB0CN   DATA  0C0H   ; SMBUS 0 CONTROL
+  00C1          +1    84     SMB0STA  DATA  0C1H   ; SMBUS 0 STATUS
+  00C2          +1    85     SMB0DAT  DATA  0C2H   ; SMBUS 0 DATA 
+  00C3          +1    86     SMB0ADR  DATA  0C3H   ; SMBUS 0 SLAVE ADDRESS
+  00C4          +1    87     ADC0GTL  DATA  0C4H   ; ADC 0 GREATER-THAN REGISTER - LOW BYTE
+  00C5          +1    88     ADC0GTH  DATA  0C5H   ; ADC 0 GREATER-THAN REGISTER - HIGH BYTE
+  00C6          +1    89     ADC0LTL  DATA  0C6H   ; ADC 0 LESS-THAN REGISTER - LOW BYTE
+  00C7          +1    90     ADC0LTH  DATA  0C7H   ; ADC 0 LESS-THAN REGISTER - HIGH BYTE
+  00C8          +1    91     T2CON    DATA  0C8H   ; TIMER 2 CONTROL
+  00C9          +1    92     T4CON    DATA  0C9H   ; TIMER 4 CONTROL
+  00CA          +1    93     RCAP2L   DATA  0CAH   ; TIMER 2 CAPTURE REGISTER - LOW BYTE
+  00CB          +1    94     RCAP2H   DATA  0CBH   ; TIMER 2 CAPTURE REGISTER - HIGH BYTE
+  00CC          +1    95     TL2      DATA  0CCH   ; TIMER 2 - LOW BYTE
+  00CD          +1    96     TH2      DATA  0CDH   ; TIMER 2 - HIGH BYTE
+  00CF          +1    97     SMB0CR   DATA  0CFH   ; SMBUS 0 CLOCK RATE
+  00D0          +1    98     PSW      DATA  0D0H   ; PROGRAM STATUS WORD
+  00D1          +1    99     REF0CN   DATA  0D1H   ; VOLTAGE REFERENCE 0 CONTROL
+  00D2          +1   100     DAC0L    DATA  0D2H   ; DAC 0 REGISTER - LOW BYTE
+  00D3          +1   101     DAC0H    DATA  0D3H   ; DAC 0 REGISTER - HIGH BYTE
+  00D4          +1   102     DAC0CN   DATA  0D4H   ; DAC 0 CONTROL
+  00D5          +1   103     DAC1L    DATA  0D5H   ; DAC 1 REGISTER - LOW BYTE
+  00D6          +1   104     DAC1H    DATA  0D6H   ; DAC 1 REGISTER - HIGH BYTE
+  00D7          +1   105     DAC1CN   DATA  0D7H   ; DAC 1 CONTROL
+  00D8          +1   106     PCA0CN   DATA  0D8H   ; PCA 0 COUNTER CONTROL
+  00D9          +1   107     PCA0MD   DATA  0D9H   ; PCA 0 COUNTER MODE
+  00DA          +1   108     PCA0CPM0 DATA  0DAH   ; CONTROL REGISTER FOR PCA 0 MODULE 0
+  00DB          +1   109     PCA0CPM1 DATA  0DBH   ; CONTROL REGISTER FOR PCA 0 MODULE 1
+  00DC          +1   110     PCA0CPM2 DATA  0DCH   ; CONTROL REGISTER FOR PCA 0 MODULE 2
+  00DD          +1   111     PCA0CPM3 DATA  0DDH   ; CONTROL REGISTER FOR PCA 0 MODULE 3
+  00DE          +1   112     PCA0CPM4 DATA  0DEH   ; CONTROL REGISTER FOR PCA 0 MODULE 4
+  00E0          +1   113     ACC      DATA  0E0H   ; ACCUMULATOR
+  00E1          +1   114     XBR0     DATA  0E1H   ; DIGITAL CROSSBAR CONFIGURATION REGISTER 0
+  00E2          +1   115     XBR1     DATA  0E2H   ; DIGITAL CROSSBAR CONFIGURATION REGISTER 1
+  00E3          +1   116     XBR2     DATA  0E3H   ; DIGITAL CROSSBAR CONFIGURATION REGISTER 2
+  00E4          +1   117     RCAP4L   DATA  0E4H   ; TIMER 4 CAPTURE REGISTER - LOW BYTE
+  00E5          +1   118     RCAP4H   DATA  0E5H   ; TIMER 4 CAPTURE REGISTER - HIGH BYTE
+  00E6          +1   119     EIE1     DATA  0E6H   ; EXTERNAL INTERRUPT ENABLE 1
+  00E7          +1   120     EIE2     DATA  0E7H   ; EXTERNAL INTERRUPT ENABLE 2
+  00E8          +1   121     ADC0CN   DATA  0E8H   ; ADC 0 CONTROL
+  00E9          +1   122     PCA0L    DATA  0E9H   ; PCA 0 TIMER - LOW BYTE
+  00EA          +1   123     PCA0CPL0 DATA  0EAH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 0 - LOW BYTE
+  00EB          +1   124     PCA0CPL1 DATA  0EBH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 1 - LOW BYTE
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     3
+
+  00EC          +1   125     PCA0CPL2 DATA  0ECH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 2 - LOW BYTE
+  00ED          +1   126     PCA0CPL3 DATA  0EDH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 3 - LOW BYTE
+  00EE          +1   127     PCA0CPL4 DATA  0EEH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 4 - LOW BYTE
+  00EF          +1   128     RSTSRC   DATA  0EFH   ; RESET SOURCE 
+  00F0          +1   129     B        DATA  0F0H   ; B REGISTER
+  00F1          +1   130     SCON1    DATA  0F1H   ; SERIAL PORT 1 CONTROL
+  00F2          +1   131     SBUF1    DATA  0F2H   ; SERAIL PORT 1 DATA
+  00F3          +1   132     SADDR1   DATA  0F3H   ; SERAIL PORT 1 
+  00F4          +1   133     TL4      DATA  0F4H   ; TIMER 4 DATA - LOW BYTE
+  00F5          +1   134     TH4      DATA  0F5H   ; TIMER 4 DATA - HIGH BYTE
+  00F6          +1   135     EIP1     DATA  0F6H   ; EXTERNAL INTERRUPT PRIORITY REGISTER 1
+  00F7          +1   136     EIP2     DATA  0F7H   ; EXTERNAL INTERRUPT PRIORITY REGISTER 2
+  00F8          +1   137     SPI0CN   DATA  0F8H   ; SERIAL PERIPHERAL INTERFACE 0 CONTROL 
+  00F9          +1   138     PCA0H    DATA  0F9H   ; PCA 0 TIMER - HIGH BYTE
+  00FA          +1   139     PCA0CPH0 DATA  0FAH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 0 - HIGH BYTE
+  00FB          +1   140     PCA0CPH1 DATA  0FBH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 1 - HIGH BYTE
+  00FC          +1   141     PCA0CPH2 DATA  0FCH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 2 - HIGH BYTE
+  00FD          +1   142     PCA0CPH3 DATA  0FDH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 3 - HIGH BYTE
+  00FE          +1   143     PCA0CPH4 DATA  0FEH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 4 - HIGH BYTE
+  00FF          +1   144     WDTCN    DATA  0FFH   ; WATCHDOG TIMER CONTROL 
+                +1   145     ;
+                +1   146     ;------------------------------------------------------------------------------
+                +1   147     ;BIT DEFINITIONS
+                +1   148     ;
+                +1   149     ; TCON 88H
+  0088          +1   150     IT0      BIT   TCON.0 ; EXT. INTERRUPT 0 TYPE
+  0089          +1   151     IE0      BIT   TCON.1 ; EXT. INTERRUPT 0 EDGE FLAG
+  008A          +1   152     IT1      BIT   TCON.2 ; EXT. INTERRUPT 1 TYPE
+  008B          +1   153     IE1      BIT   TCON.3 ; EXT. INTERRUPT 1 EDGE FLAG
+  008C          +1   154     TR0      BIT   TCON.4 ; TIMER 0 ON/OFF CONTROL
+  008D          +1   155     TF0      BIT   TCON.5 ; TIMER 0 OVERFLOW FLAG
+  008E          +1   156     TR1      BIT   TCON.6 ; TIMER 1 ON/OFF CONTROL
+  008F          +1   157     TF1      BIT   TCON.7 ; TIMER 1 OVERFLOW FLAG
+                +1   158     ;
+                +1   159     ; SCON0 98H
+  0098          +1   160     RI       BIT   SCON0.0 ; RECEIVE INTERRUPT FLAG
+  0099          +1   161     TI       BIT   SCON0.1 ; TRANSMIT INTERRUPT FLAG
+  009A          +1   162     RB8      BIT   SCON0.2 ; RECEIVE BIT 8
+  009B          +1   163     TB8      BIT   SCON0.3 ; TRANSMIT BIT 8
+  009C          +1   164     REN      BIT   SCON0.4 ; RECEIVE ENABLE
+  009D          +1   165     SM2      BIT   SCON0.5 ; MULTIPROCESSOR COMMUNICATION ENABLE
+  009E          +1   166     SM1      BIT   SCON0.6 ; SERIAL MODE CONTROL BIT 1
+  009F          +1   167     SM0      BIT   SCON0.7 ; SERIAL MODE CONTROL BIT 0
+                +1   168     ; 
+                +1   169     ; IE A8H
+  00A8          +1   170     EX0      BIT   IE.0   ; EXTERNAL INTERRUPT 0 ENABLE
+  00A9          +1   171     ET0      BIT   IE.1   ; TIMER 0 INTERRUPT ENABLE
+  00AA          +1   172     EX1      BIT   IE.2   ; EXTERNAL INTERRUPT 1 ENABLE
+  00AB          +1   173     ET1      BIT   IE.3   ; TIMER 1 INTERRUPT ENABLE
+  00AC          +1   174     ES       BIT   IE.4   ; SERIAL PORT INTERRUPT ENABLE
+  00AD          +1   175     ET2      BIT   IE.5   ; TIMER 2 INTERRUPT ENABLE
+  00AF          +1   176     EA       BIT   IE.7   ; GLOBAL INTERRUPT ENABLE
+                +1   177     ;
+                +1   178     ; IP B8H
+  00B8          +1   179     PX0      BIT   IP.0   ; EXTERNAL INTERRUPT 0 PRIORITY
+  00B9          +1   180     PT0      BIT   IP.1   ; TIMER 0 PRIORITY
+  00BA          +1   181     PX1      BIT   IP.2   ; EXTERNAL INTERRUPT 1 PRIORITY
+  00BB          +1   182     PT1      BIT   IP.3   ; TIMER 1 PRIORITY
+  00BC          +1   183     PS       BIT   IP.4   ; SERIAL PORT PRIORITY
+  00BD          +1   184     PT2      BIT   IP.5   ; TIMER 2 PRIORITY
+                +1   185     ;
+                +1   186     ; SMB0CN C0H
+  00C0          +1   187     SMBTOE   BIT   SMB0CN.0 ; SMBUS 0 TIMEOUT ENABLE
+  00C1          +1   188     SMBFTE   BIT   SMB0CN.1 ; SMBUS 0 FREE TIMER ENABLE
+  00C2          +1   189     AA       BIT   SMB0CN.2 ; SMBUS 0 ASSERT/ACKNOWLEDGE FLAG
+  00C3          +1   190     SI       BIT   SMB0CN.3 ; SMBUS 0 INTERRUPT PENDING FLAG
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     4
+
+  00C4          +1   191     STO      BIT   SMB0CN.4 ; SMBUS 0 STOP FLAG
+  00C5          +1   192     STA      BIT   SMB0CN.5 ; SMBUS 0 START FLAG
+  00C6          +1   193     ENSMB    BIT   SMB0CN.6 ; SMBUS 0 ENABLE 
+                +1   194     ;
+                +1   195     ; T2CON C8H
+  00C8          +1   196     CPRL2    BIT   T2CON.0 ; CAPTURE OR RELOAD SELECT
+  00C9          +1   197     CT2      BIT   T2CON.1 ; TIMER OR COUNTER SELECT
+  00CA          +1   198     TR2      BIT   T2CON.2 ; TIMER 2 ON/OFF CONTROL
+  00CB          +1   199     EXEN2    BIT   T2CON.3 ; TIMER 2 EXTERNAL ENABLE FLAG
+  00CC          +1   200     TCLK     BIT   T2CON.4 ; TRANSMIT CLOCK FLAG
+  00CD          +1   201     RCLK     BIT   T2CON.5 ; RECEIVE CLOCK FLAG
+  00CE          +1   202     EXF2     BIT   T2CON.6 ; EXTERNAL FLAG
+  00CF          +1   203     TF2      BIT   T2CON.7 ; TIMER 2 OVERFLOW FLAG
+                +1   204     ;
+                +1   205     ; PSW D0H
+  00D0          +1   206     P        BIT   PSW.0  ; ACCUMULATOR PARITY FLAG
+  00D1          +1   207     F1       BIT   PSW.1  ; USER FLAG 1
+  00D2          +1   208     OV       BIT   PSW.2  ; OVERFLOW FLAG
+  00D3          +1   209     RS0      BIT   PSW.3  ; REGISTER BANK SELECT 0
+  00D4          +1   210     RS1      BIT   PSW.4  ; REGISTER BANK SELECT 1
+  00D5          +1   211     F0       BIT   PSW.5  ; USER FLAG 0
+  00D6          +1   212     AC       BIT   PSW.6  ; AUXILIARY CARRY FLAG
+  00D7          +1   213     CY       BIT   PSW.7  ; CARRY FLAG
+                +1   214     ;
+                +1   215     ; PCA0CN D8H
+  00D8          +1   216     CCF0     BIT   PCA0CN.0 ; PCA 0 MODULE 0 INTERRUPT FLAG
+  00D9          +1   217     CCF1     BIT   PCA0CN.1 ; PCA 0 MODULE 1 INTERRUPT FLAG
+  00DA          +1   218     CCF2     BIT   PCA0CN.2 ; PCA 0 MODULE 2 INTERRUPT FLAG
+  00DB          +1   219     CCF3     BIT   PCA0CN.3 ; PCA 0 MODULE 3 INTERRUPT FLAG
+  00DC          +1   220     CCF4     BIT   PCA0CN.4 ; PCA 0 MODULE 4 INTERRUPT FLAG
+  00DE          +1   221     CR       BIT   PCA0CN.6 ; PCA 0 COUNTER RUN CONTROL BIT
+  00DF          +1   222     CF       BIT   PCA0CN.7 ; PCA 0 COUNTER OVERFLOW FLAG
+                +1   223     ;
+                +1   224     ; ADC0CN E8H
+  00E8          +1   225     AD0LJST  BIT   ADC0CN.0 ; ADC 0 RIGHT JUSTIFY DATA BIT
+  00E9          +1   226     AD0WINT  BIT   ADC0CN.1 ; ADC 0 WINDOW COMPARE INTERRUPT FLAG
+  00EA          +1   227     AD0STM0  BIT   ADC0CN.2 ; ADC 0 START OF CONVERSION MODE BIT 0
+  00EB          +1   228     AD0STM1  BIT   ADC0CN.3 ; ADC 0 START OF CONVERSION MODE BIT 1
+  00EC          +1   229     AD0BUSY  BIT   ADC0CN.4 ; ADC 0 BUSY FLAG
+  00ED          +1   230     AD0INT   BIT   ADC0CN.5 ; ADC 0 CONVERISION COMPLETE INTERRUPT FLAG 
+  00EE          +1   231     AD0TM    BIT   ADC0CN.6 ; ADC 0 TRACK MODE
+  00EF          +1   232     AD0EN    BIT   ADC0CN.7 ; ADC 0 ENABLE
+                +1   233     ;
+                +1   234     ; SPI0CN F8H
+  00F8          +1   235     SPIEN    BIT   SPI0CN.0 ; SPI 0 SPI ENABLE
+  00F9          +1   236     MSTEN    BIT   SPI0CN.1 ; SPI 0 MASTER ENABLE
+  00FA          +1   237     SLVSEL   BIT   SPI0CN.2 ; SPI 0 SLAVE SELECT
+  00FB          +1   238     TXBSY    BIT   SPI0CN.3 ; SPI 0 TX BUSY FLAG
+  00FC          +1   239     RXOVRN   BIT   SPI0CN.4 ; SPI 0 RX OVERRUN FLAG
+  00FD          +1   240     MODF     BIT   SPI0CN.5 ; SPI 0 MODE FAULT FLAG
+  00FE          +1   241     WCOL     BIT   SPI0CN.6 ; SPI 0 WRITE COLLISION FLAG
+  00FF          +1   242     SPIF     BIT   SPI0CN.7 ; SPI 0 INTERRUPT FLAG
+                     243     ;-----------------------------------------------------------------------------
+                     244     ;******************************************************************************
+                     245     ;Declaration des variables et fonctions publiques
+                     246     ;******************************************************************************
+                     247     PUBLIC   _Read_code
+                     248     PUBLIC   _Read_Park_IN
+                     249     PUBLIC   _Read_Park_OUT
+                     250     PUBLIC   _Decod_BIN_to_BCD
+                     251     PUBLIC   _Display
+                     252     PUBLIC   _Test_Code
+                     253     PUBLIC   _Stockage_Code
+                     254     
+                     255     ;-----------------------------------------------------------------------------
+                     256     ; EQUATES
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     5
+
+                     257     ;-----------------------------------------------------------------------------
+  0096               258     GREEN_LED       equ     P1.6             ; Port I/O pin connected to Green LED.
+                     259     
+                     260     ;-----------------------------------------------------------------------------
+                     261     ; CODE SEGMENT
+                     262     ;-----------------------------------------------------------------------------
+                     263     ProgSP_base      segment  CODE
+                     264     
+----                 265                    rseg     ProgSP_base      ; Switch to this code segment.
+                     266                    using    0              ; Specify register bank for the following
+                     267                                            ; program code.
+                     268     ;------------------------------------------------------------------------------
+                     269     ;******************************************************************************            
+                                 
+                     270     ; _Read_code
+                     271     ;
+                     272     ; Description: 
+                     273     ;
+                     274     ; Paramètres d'entrée:  R6 (MSB)- R7 (LSB) – Adresse du périphérique d’entrée
+                     275     ; Valeur retournée: R7 : contient la valeur du code lu (sur les 6 bits de poids faible). 
+                     276     ; Registres modifiés: aucun
+                     277     ;******************************************************************************    
+                     278     
+0000                 279     _Read_code:
+0000 C0E0            280                   PUSH ACC
+0002 C082            281                               PUSH DPL
+0004 C083            282                               PUSH DPH
+0006 8F82            283                               MOV DPL, R7
+0008 8E83            284                               MOV DPH, R6
+000A E0              285                               MOVX A, @DPTR
+000B C2E7            286                               CLR ACC.7
+000D C2E0            287                               CLR ACC.0
+000F 03              288                               RR A
+0010 FF              289                               MOV R7, A
+0011 D083            290                               POP DPH
+0013 D082            291                               POP DPL
+0015 D0E0            292                               POP ACC
+0017 22              293                   RET
+                     294     ;******************************************************************************            
+                                            
+                     295                               
+                     296     ;******************************************************************************            
+                                 
+                     297     ; _Read_Park_IN
+                     298     ;
+                     299     ; Description: 
+                     300     ;
+                     301     ; Paramètres d'entrée:  R6 (MSB)- R7 (LSB) – Adresse du périphérique d’entrée
+                     302     ; Valeur retournée: Bit Carry  0: pas de détection / 1: véhicule détecté 
+                     303     ; Registres modifiés: aucun
+                     304     ;******************************************************************************    
+                     305     
+0018                 306     _Read_Park_IN:
+0018 C0E0            307                                     PUSH ACC
+001A C082            308                                     PUSH DPL
+001C C083            309                                     PUSH DPH
+001E B80007          310                                     CJNE R0, #00H, Interruption1
+0021 8F82            311                                     MOV DPL, R7
+0023 8E83            312                                     MOV DPH, R6
+0025 E0              313                                     MOVX A, @DPTR
+0026 A2E0            314                                     MOV C, ACC.0                            
+0028                 315                                     Interruption1:
+0028 D083            316                                     POP DPH
+002A D082            317                                     POP DPL
+002C D0E0            318                                     POP ACC
+002E 22              319                                     RET
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     6
+
+                     320     ;******************************************************************************            
+                                                                    
+                     321                               
+                     322     ;******************************************************************************            
+                                 
+                     323     ; _Read_Park_OUT
+                     324     ;
+                     325     ; Description: 
+                     326     ;
+                     327     ; Paramètres d'entrée:  R6 (MSB)- R7 (LSB) – Adresse du périphérique d’entrée
+                     328     ; Valeur retournée: Bit Carry  0: pas de détection / 1: véhicule détecté 
+                     329     ; Registres modifiés: aucun
+                     330     ;******************************************************************************    
+                     331     
+002F                 332     _Read_Park_OUT:
+002F C0E0            333                                     PUSH ACC
+0031 C082            334                                     PUSH DPL
+0033 C083            335                                     PUSH DPH
+0035 B80007          336                                     CJNE R0, #00H, Interruption2
+                     337     
+0038 8F82            338                                     MOV DPL, R7
+003A 8E83            339                                     MOV DPH, R6                       
+003C E0              340                                     MOVX A, @DPTR
+003D A2E7            341                                     MOV C, ACC.7
+                     342                                     
+003F                 343                                     Interruption2:
+003F D083            344                                     POP DPH
+0041 D082            345                                     POP DPL
+0043 D0E0            346                                     POP ACC
+0045 22              347                                     RET
+                     348     ;****************************************************************************** 
+                     349     
+                     350     ;******************************************************************************            
+                                 
+                     351     ; _Decod_BIN_to_BCD 
+                     352     ;
+                     353     ; Description: 
+                     354     ;
+                     355     ; Paramètres d'entrée:  R6 (MSB)- R7 (LSB) – Adresse CODE de la table de conversion
+                     356     ;                                            "Display_7S"
+                     357     ; Paramètres d'entrée:  R5  – Valeur 4 bits à convertir (4bits de poids faible)
+                     358     ; Valeur retournée: R7 - Code 7 segments (Bit 0-Segment a __ Bit6-Segment g)
+                     359     ; Registres modifiés: aucun
+                     360     ;******************************************************************************    
+                     361     
+0046                 362     _Decod_BIN_to_BCD:
+                     363                                     
+0046 C0E0            364                                     PUSH ACC
+0048 C082            365                                     PUSH DPL
+004A C083            366                                     PUSH DPH
+004C B8000B          367                                     CJNE R0, #00H, Interruption3
+                     368     
+004F 8F82            369                                     MOV DPL, R7
+0051 8E83            370                                     MOV DPH, R6
+0053 ED              371                                     MOV A, R5
+0054 540F            372                                     ANL A, #00001111b
+0056 93              373                                     MOVC A, @A+DPTR
+0057 C2E7            374                                     CLR ACC.7
+0059 FF              375                                     MOV R7, A
+                     376     
+005A                 377                                     Interruption3:
+005A D083            378                                     POP DPH
+005C D082            379                                     POP DPL
+005E D0E0            380                                     POP ACC
+0060 22              381                                     RET
+                     382     ;****************************************************************************** 
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     7
+
+                     383     
+                     384     ;******************************************************************************            
+                                 
+                     385     ; _Display  
+                     386     ;
+                     387     ; Description: 
+                     388     ;
+                     389     ; Paramètres d'entrée:  R6 (MSB)- R7 (LSB) – Adresse du périphérique de sortie
+                     390     ; Paramètre d’entrée :  R5 – Code 7 segments (les 7 bits de poids faible)
+                     391     ; Paramètre d’entrée :  R3 – Code LED : si 0, LED éteinte, si non nul : LED allumée
+                     392     ; Valeur retournée: R7 : contient une recopie de la valeur envoyée au périphérique de sorti
+                             e. 
+                     393     ; Registres modifiés: aucun
+                     394     ;******************************************************************************    
+                     395     
+0061                 396     _Display:
+0061 C0E0            397                                     PUSH ACC
+0063 C082            398                                     PUSH DPL
+0065 C083            399                                     PUSH DPH
+0067 B8000C          400                                     CJNE R0, #00H, Interruption4
+                     401     
+006A 8F82            402                                     MOV DPL, R7
+006C 8E83            403                                     MOV DPH, R6
+006E EB              404                                     MOV A, R3
+006F 600C            405                                     JZ Affichage
+0071 ED              406                                     MOV A, R5
+0072 D2E7            407                                     SETB ACC.7
+0074 F0              408                                     MOVX @DPTR, A
+0075 FF              409                                     MOV R7, A
+                     410     
+0076                 411                                     Interruption4:
+0076 D083            412                                     POP DPH
+0078 D082            413                                     POP DPL
+007A D0E0            414                                     POP ACC
+                     415                                     
+007C 22              416                                     RET
+                     417                               
+007D                 418     Affichage:
+007D ED              419                                     MOV A, R5
+007E C2E7            420                                     CLR ACC.7
+0080 F0              421                                     MOVX @DPTR, A
+0081 FF              422                                     MOV R7, A
+                     423     
+0082 D083            424                                     POP DPH
+0084 D082            425                                     POP DPL
+0086 D0E0            426                                     POP ACC
+0088 22              427                                     RET 
+                     428     ;****************************************************************************** 
+                     429     
+                     430     ;******************************************************************************            
+                                 
+                     431     ; _Test_Code  
+                     432     ;
+                     433     ; Description: 
+                     434     ;
+                     435     ; Paramètres d'entrée:  R6 (MSB)- R7 (LSB) – Adresse de Tab_code
+                     436     ; Paramètre d’entrée :  R5  – Code à vérifier (sur 6 bits)
+                     437     ; Valeur retournée: R7 : non nul, il retourne la position du code trouvé dans la table,
+                     438     ;                        nul, il indique que le code n’a pas été trouvé dans la table.
+                     439     ; Registres modifiés: aucun
+                     440     ;******************************************************************************    
+                     441     
+0089                 442     _Test_Code:
+0089 C0E0            443                                     PUSH ACC
+008B C082            444                                     PUSH DPL
+008D C083            445                                     PUSH DPH
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     8
+
+008F C004            446                                     PUSH AR4
+0091 B80014          447                                     CJNE R0, #00H, Interruption5
+                     448     
+0094 8F82            449                                     MOV DPL, R7
+0096 8E83            450                                     MOV DPH, R6
+0098 E4              451                                     CLR A
+                     452     
+0099 93              453                                     MOVC A, @A + DPTR
+009A FC              454                                     MOV R4, A
+                     455     
+009B                 456                                     boucle:
+009B EC              457                                     MOV A, R4
+009C 93              458                                     MOVC A, @A + DPTR
+009D 543F            459                                     ANL A, #00111111b
+009F B50502          460                                     CJNE A, AR5, saut
+00A2 800D            461                                     SJMP Verif
+00A4                 462                                     saut:
+00A4 DCF5            463                                     DJNZ R4, boucle
+00A6 7F00            464                                     MOV R7, #00h
+                     465     
+00A8                 466                                     Interruption5:
+00A8 D004            467                                     POP AR4
+00AA D083            468                                     POP DPH
+00AC D082            469                                     POP DPL
+00AE D0E0            470                                     POP ACC
+00B0 22              471                                     RET
+                     472     
+00B1                 473     Verif:
+00B1 AF04            474                                     MOV R7, AR4
+00B3 D004            475                                     POP AR4
+00B5 D083            476                                     POP DPH
+00B7 D082            477                                     POP DPL
+00B9 D0E0            478                                     POP ACC
+00BB 22              479                                     RET
+                     480     ;****************************************************************************** 
+                     481     
+                     482     ;******************************************************************************            
+                                 
+                     483     ; _Stockage_Code 
+                     484     ;
+                     485     ; Description: 
+                     486     ;
+                     487     ; Paramètres d'entrée:  R6 (MSB)- R7 (LSB) – Adresse de Tab_histo
+                     488     ; Paramètre d’entrée :  R5 – Code à enregistrer
+                     489     ; Valeur retournée: R7 : R7 : non nul, il retourne le nombre d’enregistrements,
+                     490     ;                             nul, il indique que la table est pleine (100 enregistrements)
+                             . 
+                     491     ; Registres modifiés: aucun
+                     492     ;******************************************************************************    
+                     493     
+00BC                 494     _Stockage_Code:
+00BC C0E0            495                                     PUSH ACC
+00BE C082            496                                     PUSH DPL
+00C0 C083            497                                     PUSH DPH
+00C2 B80019          498                                     CJNE R0, #00H, Interruption6
+                     499                                     
+                     500                                     
+00C5 8F82            501                                     MOV DPL, R7
+00C7 8E83            502                                     MOV DPH, R6
+00C9 E0              503                                     MOVX A,@DPTR
+00CA B46402          504                                     CJNE A,#64h,table_non_pleine
+00CD 8016            505                                     SJMP table_pleine
+00CF                 506                                     table_non_pleine:
+00CF 04              507                                     INC A
+00D0 F0              508                                     MOVX @DPTR, A
+00D1 FF              509                                     MOV R7,A
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE     9
+
+00D2 C3              510                                     CLR C
+00D3 3582            511                                     ADDC A, DPL
+00D5 F582            512                                     MOV DPL, A
+00D7 E4              513                                     CLR A
+00D8 3583            514                                     ADDC A, DPH
+00DA F583            515                                     MOV DPH,A
+00DC ED              516                                     MOV A, R5
+00DD F0              517                                     MOVX @DPTR, A
+                     518     
+00DE                 519                                     Interruption6:
+00DE D083            520                                     POP DPH
+00E0 D082            521                                     POP DPL
+00E2 D0E0            522                                     POP ACC
+00E4 22              523                                     RET
+00E5                 524     table_pleine:
+00E5 7F00            525                                     MOV R7, #00h
+00E7 D083            526                                     POP DPH
+00E9 D082            527                                     POP DPL
+00EB D0E0            528                                     POP ACC
+00ED 22              529                                     RET
+                     530     ;****************************************************************************** 
+                     531     
+                     532     
+                     533     END
+                             
+                             
+                             
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE    10
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AA . . . . . . . .  B ADDR   00C0H.2 A   
+AC . . . . . . . .  B ADDR   00D0H.6 A   
+ACC. . . . . . . .  D ADDR   00E0H   A   
+AD0BUSY. . . . . .  B ADDR   00E8H.4 A   
+AD0EN. . . . . . .  B ADDR   00E8H.7 A   
+AD0INT . . . . . .  B ADDR   00E8H.5 A   
+AD0LJST. . . . . .  B ADDR   00E8H.0 A   
+AD0STM0. . . . . .  B ADDR   00E8H.2 A   
+AD0STM1. . . . . .  B ADDR   00E8H.3 A   
+AD0TM. . . . . . .  B ADDR   00E8H.6 A   
+AD0WINT. . . . . .  B ADDR   00E8H.1 A   
+ADC0CF . . . . . .  D ADDR   00BCH   A   
+ADC0CN . . . . . .  D ADDR   00E8H   A   
+ADC0GTH. . . . . .  D ADDR   00C5H   A   
+ADC0GTL. . . . . .  D ADDR   00C4H   A   
+ADC0H. . . . . . .  D ADDR   00BFH   A   
+ADC0L. . . . . . .  D ADDR   00BEH   A   
+ADC0LTH. . . . . .  D ADDR   00C7H   A   
+ADC0LTL. . . . . .  D ADDR   00C6H   A   
+ADC1 . . . . . . .  D ADDR   009CH   A   
+ADC1CF . . . . . .  D ADDR   00ABH   A   
+ADC1CN . . . . . .  D ADDR   00AAH   A   
+AFFICHAGE. . . . .  C ADDR   007DH   R   SEG=PROGSP_BASE
+AMX0CF . . . . . .  D ADDR   00BAH   A   
+AMX0SL . . . . . .  D ADDR   00BBH   A   
+AMX1SL . . . . . .  D ADDR   00ACH   A   
+AR4. . . . . . . .  D ADDR   0004H   A   
+AR5. . . . . . . .  D ADDR   0005H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+BOUCLE . . . . . .  C ADDR   009BH   R   SEG=PROGSP_BASE
+CCF0 . . . . . . .  B ADDR   00D8H.0 A   
+CCF1 . . . . . . .  B ADDR   00D8H.1 A   
+CCF2 . . . . . . .  B ADDR   00D8H.2 A   
+CCF3 . . . . . . .  B ADDR   00D8H.3 A   
+CCF4 . . . . . . .  B ADDR   00D8H.4 A   
+CF . . . . . . . .  B ADDR   00D8H.7 A   
+CKCON. . . . . . .  D ADDR   008EH   A   
+CPRL2. . . . . . .  B ADDR   00C8H.0 A   
+CPT0CN . . . . . .  D ADDR   009EH   A   
+CPT1CN . . . . . .  D ADDR   009FH   A   
+CR . . . . . . . .  B ADDR   00D8H.6 A   
+CT2. . . . . . . .  B ADDR   00C8H.1 A   
+CY . . . . . . . .  B ADDR   00D0H.7 A   
+DAC0CN . . . . . .  D ADDR   00D4H   A   
+DAC0H. . . . . . .  D ADDR   00D3H   A   
+DAC0L. . . . . . .  D ADDR   00D2H   A   
+DAC1CN . . . . . .  D ADDR   00D7H   A   
+DAC1H. . . . . . .  D ADDR   00D6H   A   
+DAC1L. . . . . . .  D ADDR   00D5H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EIE1 . . . . . . .  D ADDR   00E6H   A   
+EIE2 . . . . . . .  D ADDR   00E7H   A   
+EIP1 . . . . . . .  D ADDR   00F6H   A   
+EIP2 . . . . . . .  D ADDR   00F7H   A   
+EMI0CF . . . . . .  D ADDR   00A3H   A   
+EMI0CN . . . . . .  D ADDR   00AFH   A   
+EMI0TC . . . . . .  D ADDR   00A1H   A   
+ENSMB. . . . . . .  B ADDR   00C0H.6 A   
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE    11
+
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+ET2. . . . . . . .  B ADDR   00A8H.5 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+EXEN2. . . . . . .  B ADDR   00C8H.3 A   
+EXF2 . . . . . . .  B ADDR   00C8H.6 A   
+F0 . . . . . . . .  B ADDR   00D0H.5 A   
+F1 . . . . . . . .  B ADDR   00D0H.1 A   
+FLACL. . . . . . .  D ADDR   00B7H   A   
+FLSCL. . . . . . .  D ADDR   00B6H   A   
+GREEN_LED. . . . .  B ADDR   0090H.6 A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+IE0. . . . . . . .  B ADDR   0088H.1 A   
+IE1. . . . . . . .  B ADDR   0088H.3 A   
+INTERRUPTION1. . .  C ADDR   0028H   R   SEG=PROGSP_BASE
+INTERRUPTION2. . .  C ADDR   003FH   R   SEG=PROGSP_BASE
+INTERRUPTION3. . .  C ADDR   005AH   R   SEG=PROGSP_BASE
+INTERRUPTION4. . .  C ADDR   0076H   R   SEG=PROGSP_BASE
+INTERRUPTION5. . .  C ADDR   00A8H   R   SEG=PROGSP_BASE
+INTERRUPTION6. . .  C ADDR   00DEH   R   SEG=PROGSP_BASE
+IP . . . . . . . .  D ADDR   00B8H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+MODF . . . . . . .  B ADDR   00F8H.5 A   
+MSTEN. . . . . . .  B ADDR   00F8H.1 A   
+OSCICN . . . . . .  D ADDR   00B2H   A   
+OSCXCN . . . . . .  D ADDR   00B1H   A   
+OV . . . . . . . .  B ADDR   00D0H.2 A   
+P. . . . . . . . .  B ADDR   00D0H.0 A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P0MDOUT. . . . . .  D ADDR   00A4H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1MDIN . . . . . .  D ADDR   00BDH   A   
+P1MDOUT. . . . . .  D ADDR   00A5H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P2MDOUT. . . . . .  D ADDR   00A6H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+P3IF . . . . . . .  D ADDR   00ADH   A   
+P3MDOUT. . . . . .  D ADDR   00A7H   A   
+P4 . . . . . . . .  D ADDR   0084H   A   
+P5 . . . . . . . .  D ADDR   0085H   A   
+P6 . . . . . . . .  D ADDR   0086H   A   
+P7 . . . . . . . .  D ADDR   0096H   A   
+P74OUT . . . . . .  D ADDR   00B5H   A   
+PCA0CN . . . . . .  D ADDR   00D8H   A   
+PCA0CPH0 . . . . .  D ADDR   00FAH   A   
+PCA0CPH1 . . . . .  D ADDR   00FBH   A   
+PCA0CPH2 . . . . .  D ADDR   00FCH   A   
+PCA0CPH3 . . . . .  D ADDR   00FDH   A   
+PCA0CPH4 . . . . .  D ADDR   00FEH   A   
+PCA0CPL0 . . . . .  D ADDR   00EAH   A   
+PCA0CPL1 . . . . .  D ADDR   00EBH   A   
+PCA0CPL2 . . . . .  D ADDR   00ECH   A   
+PCA0CPL3 . . . . .  D ADDR   00EDH   A   
+PCA0CPL4 . . . . .  D ADDR   00EEH   A   
+PCA0CPM0 . . . . .  D ADDR   00DAH   A   
+PCA0CPM1 . . . . .  D ADDR   00DBH   A   
+PCA0CPM2 . . . . .  D ADDR   00DCH   A   
+PCA0CPM3 . . . . .  D ADDR   00DDH   A   
+PCA0CPM4 . . . . .  D ADDR   00DEH   A   
+PCA0H. . . . . . .  D ADDR   00F9H   A   
+PCA0L. . . . . . .  D ADDR   00E9H   A   
+PCA0MD . . . . . .  D ADDR   00D9H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE    12
+
+PROGSP_BASE. . . .  C SEG    00EEH       REL=UNIT
+PS . . . . . . . .  B ADDR   00B8H.4 A   
+PSCTL. . . . . . .  D ADDR   008FH   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+PT0. . . . . . . .  B ADDR   00B8H.1 A   
+PT1. . . . . . . .  B ADDR   00B8H.3 A   
+PT2. . . . . . . .  B ADDR   00B8H.5 A   
+PX0. . . . . . . .  B ADDR   00B8H.0 A   
+PX1. . . . . . . .  B ADDR   00B8H.2 A   
+RB8. . . . . . . .  B ADDR   0098H.2 A   
+RCAP2H . . . . . .  D ADDR   00CBH   A   
+RCAP2L . . . . . .  D ADDR   00CAH   A   
+RCAP4H . . . . . .  D ADDR   00E5H   A   
+RCAP4L . . . . . .  D ADDR   00E4H   A   
+RCLK . . . . . . .  B ADDR   00C8H.5 A   
+REF0CN . . . . . .  D ADDR   00D1H   A   
+REN. . . . . . . .  B ADDR   0098H.4 A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+RS0. . . . . . . .  B ADDR   00D0H.3 A   
+RS1. . . . . . . .  B ADDR   00D0H.4 A   
+RSTSRC . . . . . .  D ADDR   00EFH   A   
+RXOVRN . . . . . .  B ADDR   00F8H.4 A   
+SADDR0 . . . . . .  D ADDR   00A9H   A   
+SADDR1 . . . . . .  D ADDR   00F3H   A   
+SADEN0 . . . . . .  D ADDR   00B9H   A   
+SADEN1 . . . . . .  D ADDR   00AEH   A   
+SAUT . . . . . . .  C ADDR   00A4H   R   SEG=PROGSP_BASE
+SBUF0. . . . . . .  D ADDR   0099H   A   
+SBUF1. . . . . . .  D ADDR   00F2H   A   
+SCON0. . . . . . .  D ADDR   0098H   A   
+SCON1. . . . . . .  D ADDR   00F1H   A   
+SI . . . . . . . .  B ADDR   00C0H.3 A   
+SLVSEL . . . . . .  B ADDR   00F8H.2 A   
+SM0. . . . . . . .  B ADDR   0098H.7 A   
+SM1. . . . . . . .  B ADDR   0098H.6 A   
+SM2. . . . . . . .  B ADDR   0098H.5 A   
+SMB0ADR. . . . . .  D ADDR   00C3H   A   
+SMB0CN . . . . . .  D ADDR   00C0H   A   
+SMB0CR . . . . . .  D ADDR   00CFH   A   
+SMB0DAT. . . . . .  D ADDR   00C2H   A   
+SMB0STA. . . . . .  D ADDR   00C1H   A   
+SMBFTE . . . . . .  B ADDR   00C0H.1 A   
+SMBTOE . . . . . .  B ADDR   00C0H.0 A   
+SP . . . . . . . .  D ADDR   0081H   A   
+SPI0CFG. . . . . .  D ADDR   009AH   A   
+SPI0CKR. . . . . .  D ADDR   009DH   A   
+SPI0CN . . . . . .  D ADDR   00F8H   A   
+SPI0DAT. . . . . .  D ADDR   009BH   A   
+SPIEN. . . . . . .  B ADDR   00F8H.0 A   
+SPIF . . . . . . .  B ADDR   00F8H.7 A   
+STA. . . . . . . .  B ADDR   00C0H.5 A   
+STO. . . . . . . .  B ADDR   00C0H.4 A   
+T2CON. . . . . . .  D ADDR   00C8H   A   
+T4CON. . . . . . .  D ADDR   00C9H   A   
+TABLE_NON_PLEINE .  C ADDR   00CFH   R   SEG=PROGSP_BASE
+TABLE_PLEINE . . .  C ADDR   00E5H   R   SEG=PROGSP_BASE
+TB8. . . . . . . .  B ADDR   0098H.3 A   
+TCLK . . . . . . .  B ADDR   00C8H.4 A   
+TCON . . . . . . .  D ADDR   0088H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TF2. . . . . . . .  B ADDR   00C8H.7 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TH2. . . . . . . .  D ADDR   00CDH   A   
+TH4. . . . . . . .  D ADDR   00F5H   A   
+A51 MACRO ASSEMBLER  LIB_VOSSP_SM4                                                        06/17/2022 09:29:29 PAGE    13
+
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TL2. . . . . . . .  D ADDR   00CCH   A   
+TL4. . . . . . . .  D ADDR   00F4H   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TMR3CN . . . . . .  D ADDR   0091H   A   
+TMR3H. . . . . . .  D ADDR   0095H   A   
+TMR3L. . . . . . .  D ADDR   0094H   A   
+TMR3RLH. . . . . .  D ADDR   0093H   A   
+TMR3RLL. . . . . .  D ADDR   0092H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+TR2. . . . . . . .  B ADDR   00C8H.2 A   
+TXBSY. . . . . . .  B ADDR   00F8H.3 A   
+VERIF. . . . . . .  C ADDR   00B1H   R   SEG=PROGSP_BASE
+WCOL . . . . . . .  B ADDR   00F8H.6 A   
+WDTCN. . . . . . .  D ADDR   00FFH   A   
+XBR0 . . . . . . .  D ADDR   00E1H   A   
+XBR1 . . . . . . .  D ADDR   00E2H   A   
+XBR2 . . . . . . .  D ADDR   00E3H   A   
+_DECOD_BIN_TO_BCD.  C ADDR   0046H   R   SEG=PROGSP_BASE
+_DISPLAY . . . . .  C ADDR   0061H   R   SEG=PROGSP_BASE
+_READ_CODE . . . .  C ADDR   0000H   R   SEG=PROGSP_BASE
+_READ_PARK_IN. . .  C ADDR   0018H   R   SEG=PROGSP_BASE
+_READ_PARK_OUT . .  C ADDR   002FH   R   SEG=PROGSP_BASE
+_STOCKAGE_CODE . .  C ADDR   00BCH   R   SEG=PROGSP_BASE
+_TEST_CODE . . . .  C ADDR   0089H   R   SEG=PROGSP_BASE
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

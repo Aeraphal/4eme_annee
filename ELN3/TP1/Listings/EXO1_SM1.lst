@@ -1,0 +1,811 @@
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\EXO1_SM1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE EXO1_SM1.asm NOMOD51 SET(SMALL) DEBUG PRINT(.\Listings\EXO1_SM1.lst) OB
+                      JECT(.\Objects\EXO1_SM1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------------------------------------------------------------------------
+                       2     ;  FILE NAME   :  EXO_SM1.asm
+                       3     ;  TARGET MCU  :  C8051F020 
+                       4     ;  DESCRIPTION :  Cette suite d'exercices de base est destinée à faire
+                       5     ;                 découvrir le jeu d'instruction de la famille 8051.
+                       6     ;                 Insérez votre code sous chaque exercice.
+                       7     ;                 A la fin de la séance, vous rendrez ce fichier via E-campus
+                       8     ;                 ou par Email à l'adresse que l'on vous communiquera
+                       9     ;                 
+                      10     ;******************************************************************************
+                      11     ;******************************************************************************
+                      12     ; NE PAS MODIFIER LES DIRECTIVES et INSTRUCTIONS SUIVANTES:
+                      13     ;******************************************************************************
+                      14     ;$include (c8051f020.inc) ; Include register definition file.
+                +1    15     ;-----------------------------------------------------------------------------
+                +1    16     ;       
+                +1    17     ;       
+                +1    18     ;
+                +1    19     ;
+                +1    20     ;       FILE NAME       : C8051F020.INC 
+                +1    21     ;       TARGET MCUs     : C8051F020, 'F021, 'F022, 'F023 
+                +1    22     ;       DESCRIPTION     : Register/bit definitions for the C8051F02x product family.  
+                +1    23     ;
+                +1    24     ;       REVISION 1.0    
+                +1    25     ;
+                +1    26     ;-----------------------------------------------------------------------------
+                +1    27     ;REGISTER DEFINITIONS
+                +1    28     ;
+  0080          +1    29     P0       DATA  080H   ; PORT 0
+  0081          +1    30     SP       DATA  081H   ; STACK POINTER
+  0082          +1    31     DPL      DATA  082H   ; DATA POINTER - LOW BYTE
+  0083          +1    32     DPH      DATA  083H   ; DATA POINTER - HIGH BYTE
+  0084          +1    33     P4       DATA  084H   ; PORT 4
+  0085          +1    34     P5       DATA  085H   ; PORT 5
+  0086          +1    35     P6       DATA  086H   ; PORT 6
+  0087          +1    36     PCON     DATA  087H   ; POWER CONTROL
+  0088          +1    37     TCON     DATA  088H   ; TIMER CONTROL
+  0089          +1    38     TMOD     DATA  089H   ; TIMER MODE
+  008A          +1    39     TL0      DATA  08AH   ; TIMER 0 - LOW BYTE
+  008B          +1    40     TL1      DATA  08BH   ; TIMER 1 - LOW BYTE
+  008C          +1    41     TH0      DATA  08CH   ; TIMER 0 - HIGH BYTE
+  008D          +1    42     TH1      DATA  08DH   ; TIMER 1 - HIGH BYTE
+  008E          +1    43     CKCON    DATA  08EH   ; CLOCK CONTROL
+  008F          +1    44     PSCTL    DATA  08FH   ; PROGRAM STORE R/W CONTROL
+  0090          +1    45     P1       DATA  090H   ; PORT 1
+  0091          +1    46     TMR3CN   DATA  091H   ; TIMER 3 CONTROL
+  0092          +1    47     TMR3RLL  DATA  092H   ; TIMER 3 RELOAD REGISTER - LOW BYTE
+  0093          +1    48     TMR3RLH  DATA  093H   ; TIMER 3 RELOAD REGISTER - HIGH BYTE
+  0094          +1    49     TMR3L    DATA  094H   ; TIMER 3 - LOW BYTE
+  0095          +1    50     TMR3H    DATA  095H   ; TIMER 3 - HIGH BYTE
+  0096          +1    51     P7       DATA  096H   ; PORT 7
+  0098          +1    52     SCON0    DATA  098H   ; SERIAL PORT 0 CONTROL
+  0099          +1    53     SBUF0    DATA  099H   ; SERIAL PORT 0 BUFFER
+  009A          +1    54     SPI0CFG  DATA  09AH   ; SERIAL PERIPHERAL INTERFACE 0 CONFIGURATION
+  009B          +1    55     SPI0DAT  DATA  09BH   ; SERIAL PERIPHERAL INTERFACE 0 DATA
+  009C          +1    56     ADC1     DATA  09CH   ; ADC 1 DATA
+  009D          +1    57     SPI0CKR  DATA  09DH   ; SERIAL PERIPHERAL INTERFACE 0 CLOCK RATE CONTROL
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     2
+
+  009E          +1    58     CPT0CN   DATA  09EH   ; COMPARATOR 0 CONTROL
+  009F          +1    59     CPT1CN   DATA  09FH   ; COMPARATOR 1 CONTROL 
+  00A0          +1    60     P2       DATA  0A0H   ; PORT 2
+  00A1          +1    61     EMI0TC   DATA  0A1H   ; EMIF TIMING CONTROL
+  00A3          +1    62     EMI0CF   DATA  0A3H   ; EXTERNAL MEMORY INTERFACE (EMIF) CONFIGURATION
+  00A4          +1    63     P0MDOUT  DATA  0A4H   ; PORT 0 OUTPUT MODE CONFIGURATION
+  00A5          +1    64     P1MDOUT  DATA  0A5H   ; PORT 1 OUTPUT MODE CONFIGURATION
+  00A6          +1    65     P2MDOUT  DATA  0A6H   ; PORT 2 OUTPUT MODE CONFIGURATION
+  00A7          +1    66     P3MDOUT  DATA  0A7H   ; PORT 3 OUTPUT MODE CONFIGURATION
+  00A8          +1    67     IE       DATA  0A8H   ; INTERRUPT ENABLE
+  00A9          +1    68     SADDR0   DATA  0A9H   ; SERIAL PORT 0 SLAVE ADDRESS
+  00AA          +1    69     ADC1CN  DATA  0AAH   ; ADC 1 CONTROL
+  00AB          +1    70     ADC1CF   DATA  0ABH   ; ADC 1 ANALOG MUX CONFIGURATION
+  00AC          +1    71     AMX1SL   DATA  0ACH   ; ADC 1 ANALOG MUX CHANNEL SELECT
+  00AD          +1    72     P3IF     DATA  0ADH   ; PORT 3 EXTERNAL INTERRUPT FLAGS
+  00AE          +1    73     SADEN1   DATA  0AEH   ; SERIAL PORT 1 SLAVE ADDRESS MASK
+  00AF          +1    74     EMI0CN   DATA  0AFH   ; EXTERNAL MEMORY INTERFACE CONTROL
+  00B0          +1    75     P3       DATA  0B0H   ; PORT 3
+  00B1          +1    76     OSCXCN   DATA  0B1H   ; EXTERNAL OSCILLATOR CONTROL
+  00B2          +1    77     OSCICN   DATA  0B2H   ; INTERNAL OSCILLATOR CONTROL
+  00B5          +1    78     P74OUT   DATA  0B5H   ; PORTS 4 - 7 OUTPUT MODE
+  00B6          +1    79     FLSCL    DATA  0B6H   ; FLASH MEMORY TIMING PRESCALER
+  00B7          +1    80     FLACL    DATA  0B7H   ; FLASH ACESS LIMIT 
+  00B8          +1    81     IP       DATA  0B8H   ; INTERRUPT PRIORITY
+  00B9          +1    82     SADEN0   DATA  0B9H   ; SERIAL PORT 0 SLAVE ADDRESS MASK
+  00BA          +1    83     AMX0CF   DATA  0BAH   ; ADC 0 MUX CONFIGURATION
+  00BB          +1    84     AMX0SL   DATA  0BBH   ; ADC 0 MUX CHANNEL SELECTION
+  00BC          +1    85     ADC0CF   DATA  0BCH   ; ADC 0 CONFIGURATION
+  00BD          +1    86     P1MDIN   DATA  0BDH   ; PORT 1 INPUT MODE
+  00BE          +1    87     ADC0L    DATA  0BEH   ; ADC 0 DATA - LOW BYTE
+  00BF          +1    88     ADC0H    DATA  0BFH   ; ADC 0 DATA - HIGH BYTE 
+  00C0          +1    89     SMB0CN   DATA  0C0H   ; SMBUS 0 CONTROL
+  00C1          +1    90     SMB0STA  DATA  0C1H   ; SMBUS 0 STATUS
+  00C2          +1    91     SMB0DAT  DATA  0C2H   ; SMBUS 0 DATA 
+  00C3          +1    92     SMB0ADR  DATA  0C3H   ; SMBUS 0 SLAVE ADDRESS
+  00C4          +1    93     ADC0GTL  DATA  0C4H   ; ADC 0 GREATER-THAN REGISTER - LOW BYTE
+  00C5          +1    94     ADC0GTH  DATA  0C5H   ; ADC 0 GREATER-THAN REGISTER - HIGH BYTE
+  00C6          +1    95     ADC0LTL  DATA  0C6H   ; ADC 0 LESS-THAN REGISTER - LOW BYTE
+  00C7          +1    96     ADC0LTH  DATA  0C7H   ; ADC 0 LESS-THAN REGISTER - HIGH BYTE
+  00C8          +1    97     T2CON    DATA  0C8H   ; TIMER 2 CONTROL
+  00C9          +1    98     T4CON    DATA  0C9H   ; TIMER 4 CONTROL
+  00CA          +1    99     RCAP2L   DATA  0CAH   ; TIMER 2 CAPTURE REGISTER - LOW BYTE
+  00CB          +1   100     RCAP2H   DATA  0CBH   ; TIMER 2 CAPTURE REGISTER - HIGH BYTE
+  00CC          +1   101     TL2      DATA  0CCH   ; TIMER 2 - LOW BYTE
+  00CD          +1   102     TH2      DATA  0CDH   ; TIMER 2 - HIGH BYTE
+  00CF          +1   103     SMB0CR   DATA  0CFH   ; SMBUS 0 CLOCK RATE
+  00D0          +1   104     PSW      DATA  0D0H   ; PROGRAM STATUS WORD
+  00D1          +1   105     REF0CN   DATA  0D1H   ; VOLTAGE REFERENCE 0 CONTROL
+  00D2          +1   106     DAC0L    DATA  0D2H   ; DAC 0 REGISTER - LOW BYTE
+  00D3          +1   107     DAC0H    DATA  0D3H   ; DAC 0 REGISTER - HIGH BYTE
+  00D4          +1   108     DAC0CN   DATA  0D4H   ; DAC 0 CONTROL
+  00D5          +1   109     DAC1L    DATA  0D5H   ; DAC 1 REGISTER - LOW BYTE
+  00D6          +1   110     DAC1H    DATA  0D6H   ; DAC 1 REGISTER - HIGH BYTE
+  00D7          +1   111     DAC1CN   DATA  0D7H   ; DAC 1 CONTROL
+  00D8          +1   112     PCA0CN   DATA  0D8H   ; PCA 0 COUNTER CONTROL
+  00D9          +1   113     PCA0MD   DATA  0D9H   ; PCA 0 COUNTER MODE
+  00DA          +1   114     PCA0CPM0 DATA  0DAH   ; CONTROL REGISTER FOR PCA 0 MODULE 0
+  00DB          +1   115     PCA0CPM1 DATA  0DBH   ; CONTROL REGISTER FOR PCA 0 MODULE 1
+  00DC          +1   116     PCA0CPM2 DATA  0DCH   ; CONTROL REGISTER FOR PCA 0 MODULE 2
+  00DD          +1   117     PCA0CPM3 DATA  0DDH   ; CONTROL REGISTER FOR PCA 0 MODULE 3
+  00DE          +1   118     PCA0CPM4 DATA  0DEH   ; CONTROL REGISTER FOR PCA 0 MODULE 4
+  00E0          +1   119     ACC      DATA  0E0H   ; ACCUMULATOR
+  00E1          +1   120     XBR0     DATA  0E1H   ; DIGITAL CROSSBAR CONFIGURATION REGISTER 0
+  00E2          +1   121     XBR1     DATA  0E2H   ; DIGITAL CROSSBAR CONFIGURATION REGISTER 1
+  00E3          +1   122     XBR2     DATA  0E3H   ; DIGITAL CROSSBAR CONFIGURATION REGISTER 2
+  00E4          +1   123     RCAP4L   DATA  0E4H   ; TIMER 4 CAPTURE REGISTER - LOW BYTE
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     3
+
+  00E5          +1   124     RCAP4H   DATA  0E5H   ; TIMER 4 CAPTURE REGISTER - HIGH BYTE
+  00E6          +1   125     EIE1     DATA  0E6H   ; EXTERNAL INTERRUPT ENABLE 1
+  00E7          +1   126     EIE2     DATA  0E7H   ; EXTERNAL INTERRUPT ENABLE 2
+  00E8          +1   127     ADC0CN   DATA  0E8H   ; ADC 0 CONTROL
+  00E9          +1   128     PCA0L    DATA  0E9H   ; PCA 0 TIMER - LOW BYTE
+  00EA          +1   129     PCA0CPL0 DATA  0EAH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 0 - LOW BYTE
+  00EB          +1   130     PCA0CPL1 DATA  0EBH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 1 - LOW BYTE
+  00EC          +1   131     PCA0CPL2 DATA  0ECH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 2 - LOW BYTE
+  00ED          +1   132     PCA0CPL3 DATA  0EDH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 3 - LOW BYTE
+  00EE          +1   133     PCA0CPL4 DATA  0EEH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 4 - LOW BYTE
+  00EF          +1   134     RSTSRC   DATA  0EFH   ; RESET SOURCE 
+  00F0          +1   135     B        DATA  0F0H   ; B REGISTER
+  00F1          +1   136     SCON1    DATA  0F1H   ; SERIAL PORT 1 CONTROL
+  00F2          +1   137     SBUF1    DATA  0F2H   ; SERAIL PORT 1 DATA
+  00F3          +1   138     SADDR1   DATA  0F3H   ; SERAIL PORT 1 
+  00F4          +1   139     TL4      DATA  0F4H   ; TIMER 4 DATA - LOW BYTE
+  00F5          +1   140     TH4      DATA  0F5H   ; TIMER 4 DATA - HIGH BYTE
+  00F6          +1   141     EIP1     DATA  0F6H   ; EXTERNAL INTERRUPT PRIORITY REGISTER 1
+  00F7          +1   142     EIP2     DATA  0F7H   ; EXTERNAL INTERRUPT PRIORITY REGISTER 2
+  00F8          +1   143     SPI0CN   DATA  0F8H   ; SERIAL PERIPHERAL INTERFACE 0 CONTROL 
+  00F9          +1   144     PCA0H    DATA  0F9H   ; PCA 0 TIMER - HIGH BYTE
+  00FA          +1   145     PCA0CPH0 DATA  0FAH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 0 - HIGH BYTE
+  00FB          +1   146     PCA0CPH1 DATA  0FBH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 1 - HIGH BYTE
+  00FC          +1   147     PCA0CPH2 DATA  0FCH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 2 - HIGH BYTE
+  00FD          +1   148     PCA0CPH3 DATA  0FDH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 3 - HIGH BYTE
+  00FE          +1   149     PCA0CPH4 DATA  0FEH   ; CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 4 - HIGH BYTE
+  00FF          +1   150     WDTCN    DATA  0FFH   ; WATCHDOG TIMER CONTROL 
+                +1   151     ;
+                +1   152     ;------------------------------------------------------------------------------
+                +1   153     ;BIT DEFINITIONS
+                +1   154     ;
+                +1   155     ; TCON 88H
+  0088          +1   156     IT0      BIT   TCON.0 ; EXT. INTERRUPT 0 TYPE
+  0089          +1   157     IE0      BIT   TCON.1 ; EXT. INTERRUPT 0 EDGE FLAG
+  008A          +1   158     IT1      BIT   TCON.2 ; EXT. INTERRUPT 1 TYPE
+  008B          +1   159     IE1      BIT   TCON.3 ; EXT. INTERRUPT 1 EDGE FLAG
+  008C          +1   160     TR0      BIT   TCON.4 ; TIMER 0 ON/OFF CONTROL
+  008D          +1   161     TF0      BIT   TCON.5 ; TIMER 0 OVERFLOW FLAG
+  008E          +1   162     TR1      BIT   TCON.6 ; TIMER 1 ON/OFF CONTROL
+  008F          +1   163     TF1      BIT   TCON.7 ; TIMER 1 OVERFLOW FLAG
+                +1   164     ;
+                +1   165     ; SCON0 98H
+  0098          +1   166     RI       BIT   SCON0.0 ; RECEIVE INTERRUPT FLAG
+  0099          +1   167     TI       BIT   SCON0.1 ; TRANSMIT INTERRUPT FLAG
+  009A          +1   168     RB8      BIT   SCON0.2 ; RECEIVE BIT 8
+  009B          +1   169     TB8      BIT   SCON0.3 ; TRANSMIT BIT 8
+  009C          +1   170     REN      BIT   SCON0.4 ; RECEIVE ENABLE
+  009D          +1   171     SM2      BIT   SCON0.5 ; MULTIPROCESSOR COMMUNICATION ENABLE
+  009E          +1   172     SM1      BIT   SCON0.6 ; SERIAL MODE CONTROL BIT 1
+  009F          +1   173     SM0      BIT   SCON0.7 ; SERIAL MODE CONTROL BIT 0
+                +1   174     ; 
+                +1   175     ; IE A8H
+  00A8          +1   176     EX0      BIT   IE.0   ; EXTERNAL INTERRUPT 0 ENABLE
+  00A9          +1   177     ET0      BIT   IE.1   ; TIMER 0 INTERRUPT ENABLE
+  00AA          +1   178     EX1      BIT   IE.2   ; EXTERNAL INTERRUPT 1 ENABLE
+  00AB          +1   179     ET1      BIT   IE.3   ; TIMER 1 INTERRUPT ENABLE
+  00AC          +1   180     ES       BIT   IE.4   ; SERIAL PORT INTERRUPT ENABLE
+  00AD          +1   181     ET2      BIT   IE.5   ; TIMER 2 INTERRUPT ENABLE
+  00AF          +1   182     EA       BIT   IE.7   ; GLOBAL INTERRUPT ENABLE
+                +1   183     ;
+                +1   184     ; IP B8H
+  00B8          +1   185     PX0      BIT   IP.0   ; EXTERNAL INTERRUPT 0 PRIORITY
+  00B9          +1   186     PT0      BIT   IP.1   ; TIMER 0 PRIORITY
+  00BA          +1   187     PX1      BIT   IP.2   ; EXTERNAL INTERRUPT 1 PRIORITY
+  00BB          +1   188     PT1      BIT   IP.3   ; TIMER 1 PRIORITY
+  00BC          +1   189     PS       BIT   IP.4   ; SERIAL PORT PRIORITY
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     4
+
+  00BD          +1   190     PT2      BIT   IP.5   ; TIMER 2 PRIORITY
+                +1   191     ;
+                +1   192     ; SMB0CN C0H
+  00C0          +1   193     SMBTOE   BIT   SMB0CN.0 ; SMBUS 0 TIMEOUT ENABLE
+  00C1          +1   194     SMBFTE   BIT   SMB0CN.1 ; SMBUS 0 FREE TIMER ENABLE
+  00C2          +1   195     AA       BIT   SMB0CN.2 ; SMBUS 0 ASSERT/ACKNOWLEDGE FLAG
+  00C3          +1   196     SI       BIT   SMB0CN.3 ; SMBUS 0 INTERRUPT PENDING FLAG
+  00C4          +1   197     STO      BIT   SMB0CN.4 ; SMBUS 0 STOP FLAG
+  00C5          +1   198     STA      BIT   SMB0CN.5 ; SMBUS 0 START FLAG
+  00C6          +1   199     ENSMB    BIT   SMB0CN.6 ; SMBUS 0 ENABLE 
+                +1   200     ;
+                +1   201     ; T2CON C8H
+  00C8          +1   202     CPRL2    BIT   T2CON.0 ; CAPTURE OR RELOAD SELECT
+  00C9          +1   203     CT2      BIT   T2CON.1 ; TIMER OR COUNTER SELECT
+  00CA          +1   204     TR2      BIT   T2CON.2 ; TIMER 2 ON/OFF CONTROL
+  00CB          +1   205     EXEN2    BIT   T2CON.3 ; TIMER 2 EXTERNAL ENABLE FLAG
+  00CC          +1   206     TCLK     BIT   T2CON.4 ; TRANSMIT CLOCK FLAG
+  00CD          +1   207     RCLK     BIT   T2CON.5 ; RECEIVE CLOCK FLAG
+  00CE          +1   208     EXF2     BIT   T2CON.6 ; EXTERNAL FLAG
+  00CF          +1   209     TF2      BIT   T2CON.7 ; TIMER 2 OVERFLOW FLAG
+                +1   210     ;
+                +1   211     ; PSW D0H
+  00D0          +1   212     P        BIT   PSW.0  ; ACCUMULATOR PARITY FLAG
+  00D1          +1   213     F1       BIT   PSW.1  ; USER FLAG 1
+  00D2          +1   214     OV       BIT   PSW.2  ; OVERFLOW FLAG
+  00D3          +1   215     RS0      BIT   PSW.3  ; REGISTER BANK SELECT 0
+  00D4          +1   216     RS1      BIT   PSW.4  ; REGISTER BANK SELECT 1
+  00D5          +1   217     F0       BIT   PSW.5  ; USER FLAG 0
+  00D6          +1   218     AC       BIT   PSW.6  ; AUXILIARY CARRY FLAG
+  00D7          +1   219     CY       BIT   PSW.7  ; CARRY FLAG
+                +1   220     ;
+                +1   221     ; PCA0CN D8H
+  00D8          +1   222     CCF0     BIT   PCA0CN.0 ; PCA 0 MODULE 0 INTERRUPT FLAG
+  00D9          +1   223     CCF1     BIT   PCA0CN.1 ; PCA 0 MODULE 1 INTERRUPT FLAG
+  00DA          +1   224     CCF2     BIT   PCA0CN.2 ; PCA 0 MODULE 2 INTERRUPT FLAG
+  00DB          +1   225     CCF3     BIT   PCA0CN.3 ; PCA 0 MODULE 3 INTERRUPT FLAG
+  00DC          +1   226     CCF4     BIT   PCA0CN.4 ; PCA 0 MODULE 4 INTERRUPT FLAG
+  00DE          +1   227     CR       BIT   PCA0CN.6 ; PCA 0 COUNTER RUN CONTROL BIT
+  00DF          +1   228     CF       BIT   PCA0CN.7 ; PCA 0 COUNTER OVERFLOW FLAG
+                +1   229     ;
+                +1   230     ; ADC0CN E8H
+  00E8          +1   231     AD0LJST  BIT   ADC0CN.0 ; ADC 0 RIGHT JUSTIFY DATA BIT
+  00E9          +1   232     AD0WINT  BIT   ADC0CN.1 ; ADC 0 WINDOW COMPARE INTERRUPT FLAG
+  00EA          +1   233     AD0STM0  BIT   ADC0CN.2 ; ADC 0 START OF CONVERSION MODE BIT 0
+  00EB          +1   234     AD0STM1  BIT   ADC0CN.3 ; ADC 0 START OF CONVERSION MODE BIT 1
+  00EC          +1   235     AD0BUSY  BIT   ADC0CN.4 ; ADC 0 BUSY FLAG
+  00ED          +1   236     AD0INT   BIT   ADC0CN.5 ; ADC 0 CONVERISION COMPLETE INTERRUPT FLAG 
+  00EE          +1   237     AD0TM    BIT   ADC0CN.6 ; ADC 0 TRACK MODE
+  00EF          +1   238     AD0EN    BIT   ADC0CN.7 ; ADC 0 ENABLE
+                +1   239     ;
+                +1   240     ; SPI0CN F8H
+  00F8          +1   241     SPIEN    BIT   SPI0CN.0 ; SPI 0 SPI ENABLE
+  00F9          +1   242     MSTEN    BIT   SPI0CN.1 ; SPI 0 MASTER ENABLE
+  00FA          +1   243     SLVSEL   BIT   SPI0CN.2 ; SPI 0 SLAVE SELECT
+  00FB          +1   244     TXBSY    BIT   SPI0CN.3 ; SPI 0 TX BUSY FLAG
+  00FC          +1   245     RXOVRN   BIT   SPI0CN.4 ; SPI 0 RX OVERRUN FLAG
+  00FD          +1   246     MODF     BIT   SPI0CN.5 ; SPI 0 MODE FAULT FLAG
+  00FE          +1   247     WCOL     BIT   SPI0CN.6 ; SPI 0 WRITE COLLISION FLAG
+  00FF          +1   248     SPIF     BIT   SPI0CN.7 ; SPI 0 INTERRUPT FLAG
+                     249     ;-----------------------------------------------------------------------------
+                     250     ; EQUATES
+                     251     ;-----------------------------------------------------------------------------
+  0096               252     GREEN_LED      equ   P1.6              ; Port I/O pin connected to Green LED.
+                     253     ;-----------------------------------------------------------------------------
+                     254     ; RESET and INTERRUPT VECTORS
+                     255     ;-----------------------------------------------------------------------------
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     5
+
+                     256     
+                     257                    ; Reset Vector
+----                 258                    cseg AT 0
+0000 020000   F      259                    ljmp Main               ; Locate a jump to the start of code at 
+                     260                                            ; the reset vector.
+                     261     
+                     262     ;-----------------------------------------------------------------------------
+                     263     ; CODE SEGMENT
+                     264     ;-----------------------------------------------------------------------------
+                     265     Blink          segment  CODE
+                     266     
+----                 267                    rseg     Blink        ; Switch to this code segment.
+                     268                    using    0            ; Specify register bank for the following
+                     269                                          ; program code.
+                     270     
+0000 564F494C        271     Table_ex:          db  'VOILA UN EXEMPLE DE CHAINE A COPIER!!!'
+0004 4120554E                
+0008 20455845                
+000C 4D504C45                
+0010 20444520                
+0014 43484149                
+0018 4E452041                
+001C 20434F50                
+0020 49455221                
+0024 2121                    
+                     272     
+                     273     ;Initialisations de périphériques - Fonctionnalités Microcontroleur
+                     274     
+0026                 275     Main:          ; Disable the WDT. (IRQs not enabled at this point.)
+                     276                    ; If interrupts were enabled, we would need to explicitly disable
+                     277                    ; them so that the 2nd move to WDTCN occurs no more than four clock 
+                     278                    ; cycles after the first move to WDTCN.
+0026 75FFDE          279                    mov   WDTCN, #0DEh
+0029 75FFAD          280                    mov   WDTCN, #0ADh
+                     281                    ; Enable the Port I/O Crossbar
+002C 75E340          282                    mov   XBR2, #40h
+                     283                    ; Set P1.6 (LED) as digital output in push-pull mode.  
+002F 43BD40          284                    orl   P1MDIN, #40h        
+0032 43A540          285                    orl   P1MDOUT,#40h 
+                     286     ; Programme Principal
+                     287     ;******************************************************************************
+                     288     ;******************************************************************************
+                     289     ; VOUS POUVEZ FAIRE des MODIFICATIONS A PARTIR D'ICI
+                     290     ;******************************************************************************
+                     291     
+                     292     
+                     293     ;EXO 1 : INSTRUCTIONS DE TRANSFERT DE DONNEES
+0035                 294     Exo1:
+                     295                                     ;1.     Initialiser l'accumulateur à 0 (coder les 3 solutio
+                             ns possibles), le registre R0 à FFh et la case d'adresse mémoire 40h de la mémoire RAM interne à 55h.
+0035 7400            296                                     mov A, #00H
+                     297     
+0037 7900            298                                     mov R1, #00H
+0039 E9              299                                     mov A, R1
+                     300                                     
+003A 750500          301                                     mov 05H,#00H
+003D 7905            302                                     mov R1, #05H
+003F E7              303                                     mov A,@R1
+                     304     
+0040 78FF            305                                     mov R0,#0FFH
+                     306                                     
+0042 754055          307                                     mov 40H, #55H
+                     308                                     ;2.     Copier le contenu de l'accumulateur dans le registr
+                             e R1.
+0045 F9              309                                     mov R1,A
+                     310                                     ;3.     Copier le contenu de la mémoire 40h de la RAM inter
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     6
+
+                             ne dans la case 42h de la RAM Interne.
+0046 854042          311                                     mov 42H, 40H
+                     312                                     ;4.     Copier le contenu de la mémoire 40h de la RAM inter
+                             ne dans la case D0h de la RAM Interne à accès indirect. Que se passe-t-il si on utilise par
+                              erreur l'adressage direct sur D0h?
+0049 78D0            313                                     mov R0, #0D0H 
+004B A640            314                                     mov @R0, 40H
+                     315                                     
+                     316                                     
+                     317     ;EXO 2 : MANIPULATION DES ESPACES MEMOIRES
+004D                 318     Exo2:
+                     319                                     ;1.     Copier le contenu de 20h (DATA) dans la case mémoir
+                             e 2FFh en mémoire RAM externe (XDATA).
+004D E520            320                                     mov A, 20H
+004F 9002FF          321                                     mov DPTR, #2FFH
+0052 F0              322                                     movx @DPTR, A
+                     323                                     ;2.     Copier le contenu de 0000h (CODE) dans la case mémo
+                             ire 82h en mémoire RAM interne.
+0053 7400            324                                     mov A, #00H
+0055 900000          325                                     mov DPTR, #0000H
+0058 93              326                                     movc A, @A+DPTR
+0059 7982            327                                     mov R1,#82H
+005B F7              328                                     mov @R1,A
+                     329                                     ;3.     Copier le contenu de la mémoire 0100h de la XDATA d
+                             ans la case 43h de la RAM Interne.
+005C 900100          330                                     mov DPTR,#0100H
+005F E0              331                                     movx A,@DPTR
+0060 F543            332                                     mov 43H,A
+                     333                                     ;4.     Copier le contenu de la mémoire 1234h de la mémoire
+                              CODE dans la case 0102h de la mémoire XDATA.
+0062 7400            334                                     mov A, #00H
+0064 901234          335                                     mov DPTR, #1234H
+0067 93              336                                     movc A, @A+DPTR
+0068 900102          337                                     mov DPTR, #0102H
+006B F0              338                                     movx @DPTR, A
+                     339     
+                     340     
+                     341     ;EXO 3 : INSTRUCTIONS ARITHMETIQUES - ARITHMETIQUE NON SIGNEE
+006C                 342     Exo3:
+                     343                                     ;1.     Incrémenter l'accumulateur de 1.
+006C 04              344                                     inc A
+                     345                                     ;2.     Décrémenter de 1 l'octet d'adresse 33h de la RAM In
+                             terne.
+006D 1533            346                                     dec 33H
+                     347                                     ;3.     Echanger le contenu de B avec le contenu de la mémo
+                             ire 07FFh en mémoire externe (XDATA).
+006F 9007FF          348                                     mov DPTR, #07FFH
+0072 E0              349                                     movx A, @DPTR
+0073 C5F0            350                                     xch A,B
+0075 F0              351                                     movx @DPTR, A
+                     352                                     ;4.     En une ligne de code, échanger le contenu de A avec
+                              le contenu de la mémoire 60h.
+0076 C560            353                                     xch A,60H
+                     354     
+                     355     
+                     356     ;EXO 4 : INSTRUCTIONS LOGIQUES - MANIPULATION de BITS
+0078                 357     Exo4:
+                     358                                     ;1.     Complémenter le bit d'adresse 10h. Ou se trouve-t-i
+                             l ? (c'est le bit X de l'octet d'adresse YY dans la mémoire DATA).
+0078 B210            359                                     cpl 10H
+                     360                                     ;2.     Mettre à 1, les bits 0 et 7  de l'octet d'adresse 2
+                             2h de la RAM interne (sans changer les autres bits).
+007A D210            361                                     setb 10H
+007C D217            362                                     setb 17H
+                     363                                     ;3.     Mettre à 1, les bits 0 et 7 du registre R0 (sans ch
+                             anger les autres bits).
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     7
+
+007E E8              364                                     mov A, R0
+007F D2E0            365                                     setb 0E0H
+0081 D2E7            366                                     setb 0E7H
+0083 F8              367                                     mov R0, A
+                     368                                     ;4.     Mettre à 1, les bits 0 et 7 de l'octet d'adresse 07
+                             ffh de la XDATA (sans changer les autres bits)
+0084 9007FF          369                                     mov DPTR, #07FFH
+0087 E0              370                                     movx A, @DPTR
+0088 D2E0            371                                     setb 0E0H
+008A D2E7            372                                     setb 0E7H
+008C F0              373                                     movx @DPTR, A
+                     374     
+                     375     
+                     376     ;EXO 5 : INSTRUCTIONS DE SAUT CONDITIONNEL ET INCONDITIONNE
+008D                 377     Exo5:
+                     378                                     ;1.     Placez une valeur quelconque dans R3, incrémentez l
+                             a jusqu'à ce qu'elle atteigne la valeur B6h (pensez à initialiser R3).
+008D 7BAF            379                                     mov R3, #0AFH
+008F 0B              380                                     Chat: inc R3
+0090 BBB6FC          381                                             cjne R3, #0B6H, Chat
+                     382                                     ;2.     Remplir la mémoire RAM interne de l'adresse 20h à 4
+                             0h avec des codes ASCII égrainant l'alphabet.
+0093 7441            383                                     mov A, #'A'
+0095 7820            384                                     mov R0, #20H
+0097 F6              385                                     Antony: mov @R0, A
+0098 04              386                                                     inc A
+0099 08              387                                                     inc R0
+009A B45BFA          388                                                     cjne A, #'Z'+1, Antony
+                     389                                     ;3.     Lire le contenu de l'adresse 0000h à 0002h dans l'e
+                             space code et le copier à l'adresse 0000h à 0002h de l'espace XDATA.
+009D 900000          390                                     mov DPTR, #0000H
+00A0 7400            391                                     Alexandre:      mov A, #00H
+00A2 93              392                                                             movc A, @A+DPTR
+00A3 F0              393                                                             movx @DPTR, A
+00A4 A3              394                                                             inc DPTR
+00A5 E582            395                                                             mov A, DPL
+00A7 B403F6          396                                                             cjne A, #03H, Alexandre
+                     397     
+                     398     
+                     399     ;EXO 6 : MANIPULATION DES BANCS de REGISTRES R0-R7
+00AA                 400     Exo6:
+                     401                                     ;1.     Commuter le banc de registres R0-R7 sur le banc 2 e
+                             t copier le contenu de A dans le registre R4 sans utiliser "R4" dans l'instruction.
+00AA C2D3            402                                     clr PSW.3
+00AC D2D4            403                                     setb PSW.4
+00AE F514            404                                     mov 14H, A
+                     405                                     ;2.     Mettre à zéro la case d'adresse 08h de la ram inter
+                             ne en utilisant un adressage par registre (utiliser un registre R0...R7).
+00B0 D2D3            406                                     setb PSW.3
+00B2 C2D4            407                                     clr PSW.4
+00B4 7800            408                                     mov R0, #0
+                     409     
+                     410     
+                     411     ;EXO 7 : INSTRUCTIONS LOGIQUES - MANIPULATION de BITS - 2 
+                     412     
+00B6                 413     Exo7: 
+                     414                                     ;1.     Décaler le registre B d'une case vers la gauche, le
+                              bit6 devient bit7, le bit5 devient bit6, etc. le bit7 devient bit0.
+00B6 E5F0            415                                     mov A, B
+00B8 33              416                                     RLC A
+00B9 F5F0            417                                     mov B, A
+                     418                                     ;2.     Exécuter une rotation logique gauche sur le DPTR, l
+                             e bit 15 devient le bit 0. (Initialiser auparavant le DPTR avec la valeur 0F0Fh).
+00BB 900F0F          419                                     mov DPTR, #0F0FH
+00BE C2D7            420                                     clr CY
+00C0 E582            421                                     mov A, DPL
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     8
+
+00C2 33              422                                     RLC A
+00C3 F582            423                                     mov DPL, A
+00C5 E583            424                                     mov A, DPH
+00C7 33              425                                     RLC A
+00C8 F583            426                                     mov DPH, A
+                     427                                     
+                     428     
+                     429     ;EXO 8 : INSTRUCTIONS ARITHMETIQUES - Arithmétique non signée - 2 
+00CA                 430     Exo8:
+                     431                                     ;1.     Incrémenter de 2 la case mémoire RAM externe d'adre
+                             sse 100h.
+00CA 900100          432                                     mov DPTR, #100H
+00CD E0              433                                     movx A, @DPTR
+00CE 2402            434                                     add A, #2
+00D0 F0              435                                     movx @DPTR, A
+                     436                                     ;2.     Multiplier les données en RAM interne d'adresse 22h
+                              et 23h. Placer le résultat en 24h(LSB) et 25h(MSB).
+00D1 E522            437                                     mov A, 22H
+00D3 8523F0          438                                     mov B, 23H
+00D6 A4              439                                     mul AB
+00D7 85F025          440                                     mov 25H, B
+00DA F524            441                                     mov 24H, A
+                     442     
+                     443     
+                     444     ;EXO 9 : INSTRUCTIONS DE SAUT CONDITIONNEL ET INCONDITIONNEL - 2 
+00DC                 445     Exo9: 
+                     446                                     ;1.     Remplir la mémoire RAM externe (XDATA) de l'adresse
+                              120h à 140h avec des codes ASCII égrainant l'alphabet.
+00DC 900120          447                                     mov DPTR, #120H
+00DF 7441            448                                     mov A, #'A'
+00E1 F0              449                                     Krokmou:        movx @DPTR, A
+00E2 04              450                                                             inc A
+00E3 A3              451                                                             inc DPTR
+00E4 A882            452                                                             mov R0, DPL
+00E6 A983            453                                                             mov R1, DPH
+00E8 B83AF6          454                                                             cjne R0, #3AH, Krokmou
+00EB B901F3          455                                                             cjne R1, #01H, Krokmou
+                     456                                     ;2.     Incrémentez le DPTR initialisé avec une valeur quel
+                             conque jusqu'à la valeur de A B C D h.
+00EE 900000          457                                     mov DPTR, #0000H
+00F1                 458                                     Peace:
+00F1 A3              459                                                             inc DPTR
+00F2 A882            460                                                             mov R0, DPL
+00F4 A983            461                                                             mov R1, DPH
+00F6 B8CDF8          462                                                             cjne R0, #0CDH, Peace
+00F9 B9ABF5          463                                                             cjne R1, #0ABH, Peace
+00FC 7401            464     mov a,#1H
+                     465     
+                     466     ;EXO 10 : Exercices d'approfondissement - FACULTATIF
+                     467     
+                     468     ;1.     Additionner les registres R6 et R7, stocker le résultat dans R5. Quelles sont les l
+                             imitations ? Pour s'affranchir des limitations précédentes, refaire la même opération mais 
+                             stocker le résultat dans R4 (LSB) et R5(MSB).
+                     469     
+                     470     ;2.     Faire l'opération R0 moins R1 et placer le résultat dans R7. Que se passe t'il si R
+                             1>R0 ?
+                     471     
+                     472     ;3.     Complémenter le demi-octet de pds faible de l'adresse 2Ah de la RAM interne.
+                     473     
+                     474     ;4.     Placez une valeur quelconque dans R3, décrémentez la, jusqu'à ce qu'elle atteigne u
+                             ne valeur contenue dans R6 (pensez à initialiser R3 et R6).
+                     475     
+                     476     ;5.     Initialiser les registres R4 et R5 respectivement avec les valeurs 0Fh et F5h. Fait
+                             es un OU Exclusif entre ces deux registres et placez le résultat dans l'accumulateur.
+                     477     
+                     478     ;6.     Stocker le demi-octet de poids faible de la case mémoire d'adresse 44h de la RAM in
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE     9
+
+                             terne dans les deux demi-octets du registre R4 (si la case 44h contient 17h, alors R4 devra contenir 77h).
+                     479     
+                     480     ;7.     Elever au carré le contenu de l'octet 12h, placer le résultat dans R0 (pds fort) et
+                              R1 (pds faible).
+                     481     
+                     482     ;8.     Soit 2 nombres BCD de 16 bits (valeur 0 à 9999) stockés respectivement dans R0(MSB)
+                             -R1(LSB) et R2(MSB)-R3(LSB). Faire l'addition BCD de ces deux nombres, et stocker le résult
+                             at dans R4(MSB)-R5(LSB). La retenue sera dans le bit Carry du registre PSW.
+                     483     
+                     484     ;9.     Compter le nombre de bits à 1 dans le registre B et stocker le résultat dans R5.
+                     485     
+                     486     ;10. Diviser le contenu du registre R7 par le nombre 10, placer le quotient dans R5 et le r
+                             este dans R6.
+                     487     
+                     488     
+                     489     
+                     490     
+                     491     ;******************************************************************************
+                     492     ;******************************************************************************
+                     493     ; NE PAS MODIFIER LES DIRECTIVES et INSTRUCTIONS SUIVANTES:
+                     494     ;******************************************************************************
+                     495       
+00FE 80FE            496     bcl:   jmp bcl
+                     497     ;-----------------------------------------------------------------------------
+                     498     ; End of file.
+                     499     
+                     500     END
+                             
+                             
+                             
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE    10
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AA . . . . . . . .  B ADDR   00C0H.2 A   
+AC . . . . . . . .  B ADDR   00D0H.6 A   
+ACC. . . . . . . .  D ADDR   00E0H   A   
+AD0BUSY. . . . . .  B ADDR   00E8H.4 A   
+AD0EN. . . . . . .  B ADDR   00E8H.7 A   
+AD0INT . . . . . .  B ADDR   00E8H.5 A   
+AD0LJST. . . . . .  B ADDR   00E8H.0 A   
+AD0STM0. . . . . .  B ADDR   00E8H.2 A   
+AD0STM1. . . . . .  B ADDR   00E8H.3 A   
+AD0TM. . . . . . .  B ADDR   00E8H.6 A   
+AD0WINT. . . . . .  B ADDR   00E8H.1 A   
+ADC0CF . . . . . .  D ADDR   00BCH   A   
+ADC0CN . . . . . .  D ADDR   00E8H   A   
+ADC0GTH. . . . . .  D ADDR   00C5H   A   
+ADC0GTL. . . . . .  D ADDR   00C4H   A   
+ADC0H. . . . . . .  D ADDR   00BFH   A   
+ADC0L. . . . . . .  D ADDR   00BEH   A   
+ADC0LTH. . . . . .  D ADDR   00C7H   A   
+ADC0LTL. . . . . .  D ADDR   00C6H   A   
+ADC1 . . . . . . .  D ADDR   009CH   A   
+ADC1CF . . . . . .  D ADDR   00ABH   A   
+ADC1CN . . . . . .  D ADDR   00AAH   A   
+ALEXANDRE. . . . .  C ADDR   00A0H   R   SEG=BLINK
+AMX0CF . . . . . .  D ADDR   00BAH   A   
+AMX0SL . . . . . .  D ADDR   00BBH   A   
+AMX1SL . . . . . .  D ADDR   00ACH   A   
+ANTONY . . . . . .  C ADDR   0097H   R   SEG=BLINK
+B. . . . . . . . .  D ADDR   00F0H   A   
+BCL. . . . . . . .  C ADDR   00FEH   R   SEG=BLINK
+BLINK. . . . . . .  C SEG    0100H       REL=UNIT
+CCF0 . . . . . . .  B ADDR   00D8H.0 A   
+CCF1 . . . . . . .  B ADDR   00D8H.1 A   
+CCF2 . . . . . . .  B ADDR   00D8H.2 A   
+CCF3 . . . . . . .  B ADDR   00D8H.3 A   
+CCF4 . . . . . . .  B ADDR   00D8H.4 A   
+CF . . . . . . . .  B ADDR   00D8H.7 A   
+CHAT . . . . . . .  C ADDR   008FH   R   SEG=BLINK
+CKCON. . . . . . .  D ADDR   008EH   A   
+CPRL2. . . . . . .  B ADDR   00C8H.0 A   
+CPT0CN . . . . . .  D ADDR   009EH   A   
+CPT1CN . . . . . .  D ADDR   009FH   A   
+CR . . . . . . . .  B ADDR   00D8H.6 A   
+CT2. . . . . . . .  B ADDR   00C8H.1 A   
+CY . . . . . . . .  B ADDR   00D0H.7 A   
+DAC0CN . . . . . .  D ADDR   00D4H   A   
+DAC0H. . . . . . .  D ADDR   00D3H   A   
+DAC0L. . . . . . .  D ADDR   00D2H   A   
+DAC1CN . . . . . .  D ADDR   00D7H   A   
+DAC1H. . . . . . .  D ADDR   00D6H   A   
+DAC1L. . . . . . .  D ADDR   00D5H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EIE1 . . . . . . .  D ADDR   00E6H   A   
+EIE2 . . . . . . .  D ADDR   00E7H   A   
+EIP1 . . . . . . .  D ADDR   00F6H   A   
+EIP2 . . . . . . .  D ADDR   00F7H   A   
+EMI0CF . . . . . .  D ADDR   00A3H   A   
+EMI0CN . . . . . .  D ADDR   00AFH   A   
+EMI0TC . . . . . .  D ADDR   00A1H   A   
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE    11
+
+ENSMB. . . . . . .  B ADDR   00C0H.6 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+ET2. . . . . . . .  B ADDR   00A8H.5 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+EXEN2. . . . . . .  B ADDR   00C8H.3 A   
+EXF2 . . . . . . .  B ADDR   00C8H.6 A   
+EXO1 . . . . . . .  C ADDR   0035H   R   SEG=BLINK
+EXO2 . . . . . . .  C ADDR   004DH   R   SEG=BLINK
+EXO3 . . . . . . .  C ADDR   006CH   R   SEG=BLINK
+EXO4 . . . . . . .  C ADDR   0078H   R   SEG=BLINK
+EXO5 . . . . . . .  C ADDR   008DH   R   SEG=BLINK
+EXO6 . . . . . . .  C ADDR   00AAH   R   SEG=BLINK
+EXO7 . . . . . . .  C ADDR   00B6H   R   SEG=BLINK
+EXO8 . . . . . . .  C ADDR   00CAH   R   SEG=BLINK
+EXO9 . . . . . . .  C ADDR   00DCH   R   SEG=BLINK
+F0 . . . . . . . .  B ADDR   00D0H.5 A   
+F1 . . . . . . . .  B ADDR   00D0H.1 A   
+FLACL. . . . . . .  D ADDR   00B7H   A   
+FLSCL. . . . . . .  D ADDR   00B6H   A   
+GREEN_LED. . . . .  B ADDR   0090H.6 A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+IE0. . . . . . . .  B ADDR   0088H.1 A   
+IE1. . . . . . . .  B ADDR   0088H.3 A   
+IP . . . . . . . .  D ADDR   00B8H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+KROKMOU. . . . . .  C ADDR   00E1H   R   SEG=BLINK
+MAIN . . . . . . .  C ADDR   0026H   R   SEG=BLINK
+MODF . . . . . . .  B ADDR   00F8H.5 A   
+MSTEN. . . . . . .  B ADDR   00F8H.1 A   
+OSCICN . . . . . .  D ADDR   00B2H   A   
+OSCXCN . . . . . .  D ADDR   00B1H   A   
+OV . . . . . . . .  B ADDR   00D0H.2 A   
+P. . . . . . . . .  B ADDR   00D0H.0 A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P0MDOUT. . . . . .  D ADDR   00A4H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P1MDIN . . . . . .  D ADDR   00BDH   A   
+P1MDOUT. . . . . .  D ADDR   00A5H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P2MDOUT. . . . . .  D ADDR   00A6H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+P3IF . . . . . . .  D ADDR   00ADH   A   
+P3MDOUT. . . . . .  D ADDR   00A7H   A   
+P4 . . . . . . . .  D ADDR   0084H   A   
+P5 . . . . . . . .  D ADDR   0085H   A   
+P6 . . . . . . . .  D ADDR   0086H   A   
+P7 . . . . . . . .  D ADDR   0096H   A   
+P74OUT . . . . . .  D ADDR   00B5H   A   
+PCA0CN . . . . . .  D ADDR   00D8H   A   
+PCA0CPH0 . . . . .  D ADDR   00FAH   A   
+PCA0CPH1 . . . . .  D ADDR   00FBH   A   
+PCA0CPH2 . . . . .  D ADDR   00FCH   A   
+PCA0CPH3 . . . . .  D ADDR   00FDH   A   
+PCA0CPH4 . . . . .  D ADDR   00FEH   A   
+PCA0CPL0 . . . . .  D ADDR   00EAH   A   
+PCA0CPL1 . . . . .  D ADDR   00EBH   A   
+PCA0CPL2 . . . . .  D ADDR   00ECH   A   
+PCA0CPL3 . . . . .  D ADDR   00EDH   A   
+PCA0CPL4 . . . . .  D ADDR   00EEH   A   
+PCA0CPM0 . . . . .  D ADDR   00DAH   A   
+PCA0CPM1 . . . . .  D ADDR   00DBH   A   
+PCA0CPM2 . . . . .  D ADDR   00DCH   A   
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE    12
+
+PCA0CPM3 . . . . .  D ADDR   00DDH   A   
+PCA0CPM4 . . . . .  D ADDR   00DEH   A   
+PCA0H. . . . . . .  D ADDR   00F9H   A   
+PCA0L. . . . . . .  D ADDR   00E9H   A   
+PCA0MD . . . . . .  D ADDR   00D9H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+PEACE. . . . . . .  C ADDR   00F1H   R   SEG=BLINK
+PS . . . . . . . .  B ADDR   00B8H.4 A   
+PSCTL. . . . . . .  D ADDR   008FH   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+PT0. . . . . . . .  B ADDR   00B8H.1 A   
+PT1. . . . . . . .  B ADDR   00B8H.3 A   
+PT2. . . . . . . .  B ADDR   00B8H.5 A   
+PX0. . . . . . . .  B ADDR   00B8H.0 A   
+PX1. . . . . . . .  B ADDR   00B8H.2 A   
+RB8. . . . . . . .  B ADDR   0098H.2 A   
+RCAP2H . . . . . .  D ADDR   00CBH   A   
+RCAP2L . . . . . .  D ADDR   00CAH   A   
+RCAP4H . . . . . .  D ADDR   00E5H   A   
+RCAP4L . . . . . .  D ADDR   00E4H   A   
+RCLK . . . . . . .  B ADDR   00C8H.5 A   
+REF0CN . . . . . .  D ADDR   00D1H   A   
+REN. . . . . . . .  B ADDR   0098H.4 A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+RS0. . . . . . . .  B ADDR   00D0H.3 A   
+RS1. . . . . . . .  B ADDR   00D0H.4 A   
+RSTSRC . . . . . .  D ADDR   00EFH   A   
+RXOVRN . . . . . .  B ADDR   00F8H.4 A   
+SADDR0 . . . . . .  D ADDR   00A9H   A   
+SADDR1 . . . . . .  D ADDR   00F3H   A   
+SADEN0 . . . . . .  D ADDR   00B9H   A   
+SADEN1 . . . . . .  D ADDR   00AEH   A   
+SBUF0. . . . . . .  D ADDR   0099H   A   
+SBUF1. . . . . . .  D ADDR   00F2H   A   
+SCON0. . . . . . .  D ADDR   0098H   A   
+SCON1. . . . . . .  D ADDR   00F1H   A   
+SI . . . . . . . .  B ADDR   00C0H.3 A   
+SLVSEL . . . . . .  B ADDR   00F8H.2 A   
+SM0. . . . . . . .  B ADDR   0098H.7 A   
+SM1. . . . . . . .  B ADDR   0098H.6 A   
+SM2. . . . . . . .  B ADDR   0098H.5 A   
+SMB0ADR. . . . . .  D ADDR   00C3H   A   
+SMB0CN . . . . . .  D ADDR   00C0H   A   
+SMB0CR . . . . . .  D ADDR   00CFH   A   
+SMB0DAT. . . . . .  D ADDR   00C2H   A   
+SMB0STA. . . . . .  D ADDR   00C1H   A   
+SMBFTE . . . . . .  B ADDR   00C0H.1 A   
+SMBTOE . . . . . .  B ADDR   00C0H.0 A   
+SP . . . . . . . .  D ADDR   0081H   A   
+SPI0CFG. . . . . .  D ADDR   009AH   A   
+SPI0CKR. . . . . .  D ADDR   009DH   A   
+SPI0CN . . . . . .  D ADDR   00F8H   A   
+SPI0DAT. . . . . .  D ADDR   009BH   A   
+SPIEN. . . . . . .  B ADDR   00F8H.0 A   
+SPIF . . . . . . .  B ADDR   00F8H.7 A   
+STA. . . . . . . .  B ADDR   00C0H.5 A   
+STO. . . . . . . .  B ADDR   00C0H.4 A   
+T2CON. . . . . . .  D ADDR   00C8H   A   
+T4CON. . . . . . .  D ADDR   00C9H   A   
+TABLE_EX . . . . .  C ADDR   0000H   R   SEG=BLINK
+TB8. . . . . . . .  B ADDR   0098H.3 A   
+TCLK . . . . . . .  B ADDR   00C8H.4 A   
+TCON . . . . . . .  D ADDR   0088H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TF2. . . . . . . .  B ADDR   00C8H.7 A   
+A51 MACRO ASSEMBLER  EXO1_SM1                                                             04/26/2022 12:09:27 PAGE    13
+
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TH2. . . . . . . .  D ADDR   00CDH   A   
+TH4. . . . . . . .  D ADDR   00F5H   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TL2. . . . . . . .  D ADDR   00CCH   A   
+TL4. . . . . . . .  D ADDR   00F4H   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TMR3CN . . . . . .  D ADDR   0091H   A   
+TMR3H. . . . . . .  D ADDR   0095H   A   
+TMR3L. . . . . . .  D ADDR   0094H   A   
+TMR3RLH. . . . . .  D ADDR   0093H   A   
+TMR3RLL. . . . . .  D ADDR   0092H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+TR2. . . . . . . .  B ADDR   00C8H.2 A   
+TXBSY. . . . . . .  B ADDR   00F8H.3 A   
+WCOL . . . . . . .  B ADDR   00F8H.6 A   
+WDTCN. . . . . . .  D ADDR   00FFH   A   
+XBR0 . . . . . . .  D ADDR   00E1H   A   
+XBR1 . . . . . . .  D ADDR   00E2H   A   
+XBR2 . . . . . . .  D ADDR   00E3H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
