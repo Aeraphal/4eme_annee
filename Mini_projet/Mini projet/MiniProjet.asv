@@ -1,0 +1,70 @@
+clear variables;
+close all;
+
+
+X = im2double(imread('leopard.png'));
+
+proxabs=@(x,g) (x>g).*(x-g) + (x<-g).*(x+g);
+%%proxnorm2=@(x,g) (x/(2*g+1));
+
+
+%%proxtest=@(x,lambda,mu,n,m) (x<lambda*mu).*(-mu*lambda*opDt(opD(eye(n,m)))+x) + ...
+                        %%(x>lambda*mu).*(mu*lambda*opDt(opD(eye(n,m)))+x);
+
+grad_u=@(u,z,lambda)(-opDt(-opD(u)+z)- opDt(-opD(lambda*opB(u))));
+grad_v=@(v,z,lambda)(-opDt(-opD(v)+z)-opDt();
+
+z=X;
+dim=length(X);
+taille=size(X);
+n=taille(1);
+m=taille(2);
+b=randn(dim,1);
+
+u=rand(taille);
+v=rand(taille);
+x=u+v;
+u1=u;
+u2=u1;
+v1=v;
+v2=v;
+
+
+
+gamma=0.5;
+eps= 0.01;
+delta=15;
+lambda=0.5;
+mu=0.5;
+compteur=1;
+
+while delta> eps && compteur<500
+    compteur=compteur+1;
+    
+    y=u1 - gamma*grad_u(u1,z,lambda);
+    u1= y -gamma*proxabs(y/gamma,mu/gamma);
+    
+    y1=v1 - gamma*grad_v(v1,z,lambda);
+    v1= y1 -gamma*proxabs(y1/gamma,mu/gamma);
+    
+    x1=u1+v1;
+    delta=(norm(x1-x,2));
+    u2=u1;
+    v2=v1;
+    x=x1;
+
+    disp(delta)
+    
+end
+x_final = x + z;
+u_final = u1 + z;%-opBt(u) + z;
+v_final = v1 +z ;%-opDt(v) + z;
+figure(10)
+subplot(411)
+imshow(X)
+subplot(412)
+imshow(x_final)
+subplot(413)
+imshow(u_final)
+subplot(414)
+imshow(v_final)

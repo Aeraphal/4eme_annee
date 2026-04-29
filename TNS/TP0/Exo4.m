@@ -1,0 +1,23 @@
+clear variables
+
+a = porte(x+3);
+b = f(x./4);
+
+Y=-4:0.1:4;
+
+
+
+subplot(3,2,1)
+plot(a,Y,'r')
+legend('porte1')
+grid on
+xlabel('x')
+ylaber('f(x)')
+
+
+
+
+
+
+
+
